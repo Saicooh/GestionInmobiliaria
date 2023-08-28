@@ -6,5 +6,6 @@ public class GestionInmobiliaria
     {
         System.out.println("Bienvenido a la Gestion Inmobilaria");
         System.out.println("ola");
+        System.out.println("es hora de empezar a vender casas");
     }
 }
