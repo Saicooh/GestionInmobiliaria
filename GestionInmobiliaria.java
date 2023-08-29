@@ -6,7 +6,7 @@ public class GestionInmobiliaria
     {
         System.out.println("Bienvenido a la gestión inmobilaria");
 
-        Menúes menu = new Menúes();
+        Menues menu = new Menues();
 
         menu.mostrarMenu();
 
