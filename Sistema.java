@@ -4,6 +4,8 @@ public class Sistema
     {
         // Pedir nombre y dirección
 
+
+
         // Crear edificio
 
         // Agregar edificio al mapa
@@ -44,6 +46,8 @@ public class Sistema
 
     public void agregarDepartamento()
     {
+        //Pedir edificio
+
         // Pedir tipo de departamento
 
         // Pedir cantidad de habitaciones
