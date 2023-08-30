@@ -69,10 +69,22 @@ public class Menues
 
         switch(opcion)
         {
-            case 1 -> funciones.agregarEdificio();
-            case 2 -> funciones.buscarEdificio();
-            case 3 -> funciones.eliminarEdificio();
-            case 4 -> funciones.mostrarEdificios();
+            case 1 -> {
+                funciones.agregarEdificio();
+                menu.mostrarMenuSistema();
+            }
+            case 2 -> {
+                funciones.buscarEdificio();
+                menu.mostrarMenuSistema();
+            }
+            case 3 -> {
+                funciones.eliminarEdificio();
+                menu.mostrarMenuSistema();
+            }
+            case 4 -> {
+                funciones.mostrarEdificios();
+                menu.mostrarMenuSistema();
+            }
             case 5 -> menu.mostrarSubMenuDep();
             case 6 -> menu.mostrarMenu();
         }

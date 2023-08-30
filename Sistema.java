@@ -3,8 +3,8 @@ import java.util.*;
 
 public class Sistema
 {
-    public HashMap<String, Edificio> mapaEdificios;
-    private ArrayList<Edificio> listaEdificios = new ArrayList<>();
+    private static HashMap<String, Edificio> mapaEdificios = new HashMap<>();
+    private static ArrayList<Edificio> listaEdificios = new ArrayList<>();
 
     public void agregarEdificio() throws IOException
     {
@@ -24,6 +24,10 @@ public class Sistema
         mapaEdificios.put(nombre, edificio);
         listaEdificios.add(edificio);
 
+        for (String clave : mapaEdificios.keySet()) {
+            System.out.println("Clave: " + clave);
+        }
+
         System.out.println("Se ha guardado el edificio correctamente");
     }
 
@@ -33,21 +37,26 @@ public class Sistema
         BufferedReader Lector = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Ingrese el nombre del edificio: ");
+
         String nombre = Lector.readLine();
 
         Edificio edificio = mapaEdificios.get(nombre);
 
-        System.out.println("Nombre: " + edificio.getNombre());
-        System.out.println("Dirección: " + edificio.getDireccion());
-        System.out.println("Demanda: " + edificio.getDemanda());
-        System.out.println("Cantidad de departamentos: " + edificio.getCantidadDepartamentos());
-        System.out.println("Cantidad de departamentos disponibles: " + edificio.getCantidadDepartamentosDisponibles());
+        if (edificio != null)
+        {
+            System.out.println("Nombre: " + edificio.getNombre());
+            System.out.println("Dirección: " + edificio.getDireccion());
+            System.out.println("Demanda: " + edificio.getDemanda());
+            System.out.println("Cantidad de departamentos: " + edificio.getCantidadDepartamentos());
+            System.out.println("Cantidad de departamentos disponibles: " + edificio.getCantidadDepartamentosDisponibles());
 
-        // Mostrar edificio y mostrar menu de opciones
+            // Mostrar edificio y mostrar menu de opciones
 
-        // Si no existe, mostrar mensaje de error
-
-        // Si existe, mostrar menu de opciones
+            // Si existe, mostrar menu de opciones
+        } else {
+            System.out.println("El edificio no existe en el mapa.");
+            // Mostrar mensaje de error
+        }
     }
 
     public void eliminarEdificio() throws IOException
@@ -133,4 +142,6 @@ public class Sistema
 
         // Si no hay departamentos disponibles, mostrar mensaje de que no hay departamentos disponibles
     }
+
+    public HashMap<String, Edificio> getMapaEdificios() { return this.mapaEdificios; }
 }
