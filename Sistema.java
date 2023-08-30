@@ -1,23 +1,45 @@
+import java.io.*;
+import java.util.*;
+
 public class Sistema
 {
-    public void agregarEdificio()
+    public HashMap<String, Edificio> mapaEdificios;
+
+    public void agregarEdificio() throws IOException
     {
-        // Pedir nombre y dirección
+        BufferedReader Lector = new BufferedReader(new InputStreamReader(System.in));
 
+        System.out.println("Ingrese el nombre del edificio: ");
+        String nombre = Lector.readLine();
 
+        System.out.println("Ingrese la dirección del edificio: ");
+        String direccion = Lector.readLine();
 
-        // Crear edificio
+        System.out.println("Ingrese la demanda del edificio");
+        int demanda = Integer.parseInt(Lector.readLine());
 
-        // Agregar edificio al mapa
+        Edificio edificio = new Edificio(nombre, direccion, demanda);
 
-        // Mostrar mensaje de éxito
+        mapaEdificios.put(nombre, edificio);
+
+        System.out.println("Se ha guardado el edificio correctamente");
     }
 
-    public void buscarEdificio()
+    public void buscarEdificio() throws IOException
     {
         // Pedir nombre de edificio
+        BufferedReader Lector = new BufferedReader(new InputStreamReader(System.in));
 
-        // Buscar edificio en el mapa
+        System.out.println("Ingrese el nombre del edificio: ");
+        String nombre = Lector.readLine();
+
+        Edificio edificio = mapaEdificios.get(nombre);
+
+        System.out.println("Nombre: " + edificio.getNombre());
+        System.out.println("Dirección: " + edificio.getDireccion());
+        System.out.println("Demanda: " + edificio.getDemanda());
+        System.out.println("Cantidad de departamentos: " + edificio.getCantidadDepartamentos());
+        System.out.println("Cantidad de departamentos disponibles: " + edificio.getCantidadDepartamentosDisponibles());
 
         // Mostrar edificio y mostrar menu de opciones
 
@@ -26,7 +48,7 @@ public class Sistema
         // Si existe, mostrar menu de opciones
     }
 
-    public void eliminarEdificio()
+    public void eliminarEdificio() throws IOException
     {
         // Pedir nombre de edificio
 
@@ -37,14 +59,14 @@ public class Sistema
         // Si existe, eliminar edificio del mapa y mostrar mensaje de éxito
     }
 
-    public void mostrarEdificios(boolean disponible)
+    public void mostrarEdificios(boolean disponible) throws IOException
     {
         // Mostrar todos los edificios del mapa
 
         // Si no hay edificios, mostrar mensaje de error
     }
 
-    public void agregarDepartamento()
+    public void agregarDepartamento() throws IOException
     {
         //Pedir edificio
 
@@ -61,7 +83,7 @@ public class Sistema
         // Mostrar mensaje de éxito
     }
 
-    public void buscarDepartamento()
+    public void buscarDepartamento() throws IOException
     {
         // Pedir número de departamento
 
@@ -72,7 +94,7 @@ public class Sistema
         // Si existe, mostrar departamento y mostrar menu de opciones
     }
 
-    public void eliminarDepartamento()
+    public void eliminarDepartamento() throws IOException
     {
         // Pedir número de departamento
 
@@ -83,14 +105,14 @@ public class Sistema
         // Si existe, eliminar departamento del edificio y mostrar mensaje de éxito
     }
 
-    public void mostrarDepartamentos()
+    public void mostrarDepartamentos() throws IOException
     {
         // Mostrar todos los departamentos del edificio, con su tipo, precio y disponibilidad
 
         // Si no hay departamentos, mostrar mensaje de error
     }
 
-    public void mostrarDepartamentosDisponibles()
+    public void mostrarDepartamentosDisponibles() throws IOException
     {
         // Mostrar todos los departamentos disponibles del edificio, con su tipo y precio
 

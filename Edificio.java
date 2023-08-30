@@ -1,23 +1,24 @@
 import java.util.Map;
+import java.util.ArrayList;
 
 public class Edificio
 {
     private String nombre;
     private String direccion;
     private int cantidadDepartamentos;
-    private int cantidadEdificios;
     private int cantidadDepartamentosDisponibles;
-    private Departamento[] departamentos;
-    private Map<String, Edificio> mapaEdificios;
+    private ArrayList<Departamento> departamentos;
+
     private int demanda;
 
-    public Edificio(String nombre, String direccion)
+    public Edificio(String nombre, String direccion, int demanda)
     {
         this.nombre = nombre;
         this.direccion = direccion;
         this.cantidadDepartamentos = 0;
         this.cantidadDepartamentosDisponibles = 0;
-        this.departamentos = new Departamento[cantidadDepartamentos];
+        this.departamentos = new ArrayList<>();
+        this.demanda = demanda;
     }
 
     public String getNombre() {
@@ -36,24 +37,8 @@ public class Edificio
         return this.cantidadDepartamentosDisponibles;
     }
 
-    public int getCantidadEdificios() {
-        return this.cantidadEdificios;
-    }
-
-    public Departamento[] getDepartamentos() {
-        return this.departamentos;
-    }
-
-    public Map<String, Edificio> getMapaEdificios() {
-        return this.mapaEdificios;
-    }
-
     public int getDemanda() {
         return this.demanda;
-    }
-
-    public void getEdificio(String clave) {
-        this.mapaEdificios.get(clave);
     }
 
     public void setNombre(String nombre) {
@@ -66,18 +51,6 @@ public class Edificio
 
     public void setCantidadDepartamentos(int cantidadDepartamentos) {
         this.cantidadDepartamentos = cantidadDepartamentos;
-    }
-
-    public void setDepartamentos(Departamento[] departamentos) {
-        this.departamentos = departamentos;
-    }
-
-    public void setMapaEdificios(Map<String, Edificio> mapaEdificios) {
-        this.mapaEdificios = mapaEdificios;
-    }
-
-    public void setCantidadEdificios(int cantidadEdificios) {
-        this.cantidadEdificios = cantidadEdificios;
     }
 
     public void setDemanda(int demanda) {
