@@ -111,18 +111,33 @@ public class Menues
         {
             opcion = Integer.parseInt(Lector.readLine());
 
-            if(opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4 && opcion != 5)
+            if(opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4 && opcion != 5 && opcion != 6)
                 System.out.println("Ingrese una opcion valida");
             else break;
         }
 
         switch(opcion)
         {
-            case 1 -> funciones.agregarDepartamento();
-            case 2 -> funciones.buscarDepartamento();
-            case 3 -> funciones.eliminarDepartamento();
-            case 4 -> funciones.mostrarDepartamentos();
-            case 5 -> funciones.mostrarDepartamentosDisponibles();
+            case 1 -> {
+                funciones.agregarDepartamento();
+                menu.mostrarSubMenuDep();
+            }
+            case 2 -> {
+                funciones.buscarDepartamento();
+                menu.mostrarSubMenuDep();
+            }
+            case 3 -> {
+                funciones.eliminarDepartamento();
+                menu.mostrarSubMenuDep();
+            }
+            case 4 -> {
+                funciones.mostrarDepartamentos();
+                menu.mostrarSubMenuDep();
+            }
+            case 5 -> {
+                funciones.mostrarDepartamentosDisponibles();
+                menu.mostrarSubMenuDep();
+            }
             case 6 -> menu.mostrarMenuSistema();
         }
     }

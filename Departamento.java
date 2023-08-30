@@ -10,7 +10,7 @@ public class Departamento
         this.numero = numero;
         this.cantidadHabitaciones = cantidadHabitaciones;
         this.disponible = true;
-        this.tipo = new Tipo(nombreTipo, precio);
+        this.tipo = new Tipo(nombreTipo);
     }
 
     public int getNumero()

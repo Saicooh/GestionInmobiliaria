@@ -13,10 +13,5 @@ public class GestionInmobiliaria
 
         menu.mostrarMenu();
 
-
-
-
-
-
     }
 }

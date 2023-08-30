@@ -49,11 +49,9 @@ public class Sistema
             System.out.println("Demanda: " + edificio.getDemanda());
             System.out.println("Cantidad de departamentos: " + edificio.getCantidadDepartamentos());
             System.out.println("Cantidad de departamentos disponibles: " + edificio.getCantidadDepartamentosDisponibles());
-
-            // Mostrar edificio y mostrar menu de opciones
-
-            // Si existe, mostrar menu de opciones
-        } else {
+        }
+        else
+        {
             System.out.println("El edificio no existe en el mapa.");
             // Mostrar mensaje de error
         }
@@ -62,12 +60,25 @@ public class Sistema
     public void eliminarEdificio() throws IOException
     {
         // Pedir nombre de edificio
+        BufferedReader Lector = new BufferedReader(new InputStreamReader(System.in));
 
-        // Buscar edificio en el mapa
+        System.out.println("Ingrese el nombre del edificio: ");
 
-        // Si no existe, mostrar mensaje de error
+        String nombre = Lector.readLine();
 
-        // Si existe, eliminar edificio del mapa y mostrar mensaje de éxito
+        Edificio edificio = mapaEdificios.get(nombre);
+
+        if (edificio != null)
+        {
+            mapaEdificios.remove(nombre);
+            listaEdificios.remove(edificio);
+
+            System.out.println("Se ha eliminado el edificio correctamente");
+        }
+        else
+        {
+            System.out.println("El edificio no existe en el mapa.");
+        }
     }
 
     public void mostrarEdificios() throws IOException
@@ -92,6 +103,25 @@ public class Sistema
 
     public void agregarDepartamento() throws IOException
     {
+        BufferedReader Lector = new BufferedReader(new InputStreamReader(System.in));
+
+        String nombreEdificio = Lector.readLine();
+
+        Edificio edificio = mapaEdificios.get(nombreEdificio);
+
+        if (edificio == null)
+        {
+            System.out.println("El edificio no existe en el mapa.");
+            return;
+        }
+
+        System.out.println("Ingrese el número del departamento: ");
+        int numero = Integer.parseInt(Lector.readLine());
+
+        System.out.println("Ingrese el tipo de departamento: ");
+        String tipo = Lector.readLine();
+
+
         //Pedir edificio
 
         // Pedir tipo de departamento
