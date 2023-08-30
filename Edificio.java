@@ -21,39 +21,23 @@ public class Edificio
         this.demanda = demanda;
     }
 
-    public String getNombre() {
-        return this.nombre;
-    }
+    public String getNombre() { return this.nombre; }
 
-    public String getDireccion() {
-        return this.direccion;
-    }
+    public String getDireccion() { return this.direccion; }
 
-    public int getCantidadDepartamentos() {
-        return this.cantidadDepartamentos;
-    }
+    public int getCantidadDepartamentos() { return this.cantidadDepartamentos; }
 
-    public int getCantidadDepartamentosDisponibles() {
-        return this.cantidadDepartamentosDisponibles;
-    }
+    public int getCantidadDepartamentosDisponibles() { return this.cantidadDepartamentosDisponibles; }
 
-    public int getDemanda() {
-        return this.demanda;
-    }
+    public int getDemanda() { return this.demanda; }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public ArrayList<Departamento> getDepartamentos() { return this.departamentos; }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public void setCantidadDepartamentos(int cantidadDepartamentos) {
-        this.cantidadDepartamentos = cantidadDepartamentos;
-    }
+    public void setDireccion(String direccion) { this.direccion = direccion; }
 
-    public void setDemanda(int demanda) {
-        this.demanda = demanda;
-    }
+    public void setCantidadDepartamentos(int cantidadDepartamentos) { this.cantidadDepartamentos = cantidadDepartamentos; }
+
+    public void setDemanda(int demanda) { this.demanda = demanda; }
 }
