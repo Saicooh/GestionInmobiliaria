@@ -5,7 +5,7 @@ public class Departamento
     private boolean disponible;
     private Tipo tipo;
 
-    public Departamento(int numero, int cantidadHabitaciones, boolean disponible, String nombreTipo, int precio)
+    public Departamento(int numero, int cantidadHabitaciones,String nombreTipo)
     {
         this.numero = numero;
         this.cantidadHabitaciones = cantidadHabitaciones;

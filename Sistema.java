@@ -103,27 +103,39 @@ public class Sistema
 
     public void agregarDepartamento() throws IOException
     {
+        //Pedir edificio
         BufferedReader Lector = new BufferedReader(new InputStreamReader(System.in));
 
-        String nombreEdificio = Lector.readLine();
+        System.out.println("Ingrese el nombre del edificio: ");
 
-        Edificio edificio = mapaEdificios.get(nombreEdificio);
-
-        if (edificio == null)
+        while (true)
         {
-            System.out.println("El edificio no existe en el mapa.");
-            return;
+            String nombre = Lector.readLine();
+
+            Edificio edificio = mapaEdificios.get(nombre);
+
+            if (edificio != null)
+            {
+                int numero = Integer.parseInt(Lector.readLine());
+                int cantidadDeHabitaciones = Integer.parseInt(Lector.readLine());
+                String nombreTipo = Lector.readLine();
+
+                Departamento departamento = new Departamento(numero, cantidadDeHabitaciones, nombreTipo);
+
+                edificio.getDepartamentos().add(departamento);
+
+                mapaEdificios.put(nombre, edificio);
+
+
+                // Mostrar edificio y mostrar menu de opciones
+
+                // Si existe, mostrar menu de opciones
+            } else {
+                System.out.println("El edificio no existe en el mapa.");
+                System.out.println("Intente nuevamente");
+                // Mostrar mensaje de error
+            }
         }
-
-        System.out.println("Ingrese el número del departamento: ");
-        int numero = Integer.parseInt(Lector.readLine());
-
-        System.out.println("Ingrese el tipo de departamento: ");
-        String tipo = Lector.readLine();
-
-
-        //Pedir edificio
-
         // Pedir tipo de departamento
 
         // Pedir cantidad de habitaciones
