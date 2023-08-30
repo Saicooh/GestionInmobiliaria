@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Sistema
 {
-    private static HashMap<String, Edificio> mapaEdificios = new HashMap<>();
+    public static HashMap<String, Edificio> mapaEdificios = new HashMap<>();
     private static ArrayList<Edificio> listaEdificios = new ArrayList<>();
 
     public void agregarEdificio() throws IOException
@@ -123,30 +123,19 @@ public class Sistema
                 Departamento departamento = new Departamento(numero, cantidadDeHabitaciones, nombreTipo);
 
                 edificio.getDepartamentos().add(departamento);
+                edificio.setCantidadDepartamentos(edificio.getCantidadDepartamentos()+1);
+                edificio.setCantidadDepartamentosDisponibles(edificio.getCantidadDepartamentosDisponibles()+1);
 
                 mapaEdificios.put(nombre, edificio);
 
+                break;
 
-                // Mostrar edificio y mostrar menu de opciones
-
-                // Si existe, mostrar menu de opciones
             } else {
                 System.out.println("El edificio no existe en el mapa.");
                 System.out.println("Intente nuevamente");
-                // Mostrar mensaje de error
+
             }
         }
-        // Pedir tipo de departamento
-
-        // Pedir cantidad de habitaciones
-
-        // Pedir precio
-
-        // Crear departamento
-
-        // Agregar departamento al edificio
-
-        // Mostrar mensaje de éxito
     }
 
     public void buscarDepartamento() throws IOException

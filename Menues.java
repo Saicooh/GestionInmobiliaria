@@ -1,5 +1,5 @@
 import java.io.*;
-
+import java.util.*;
 
 public class Menues
 {
@@ -85,7 +85,22 @@ public class Menues
                 funciones.mostrarEdificios();
                 menu.mostrarMenuSistema();
             }
-            case 5 -> menu.mostrarSubMenuDep();
+            case 5 -> {
+
+                System.out.println("Ingrese el nombre del edificio: ");
+
+                String nombre = Lector.readLine();
+
+                Edificio edificio = Sistema.mapaEdificios.get(nombre);
+
+                if(edificio == null)
+                {
+                    //validar si extiste
+                }
+
+                menu.mostrarSubMenuDep(/*Poner el string*/);
+
+            }
             case 6 -> menu.mostrarMenu();
         }
 
