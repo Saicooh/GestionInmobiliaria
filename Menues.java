@@ -72,7 +72,7 @@ public class Menues
             case 1 -> funciones.agregarEdificio();
             case 2 -> funciones.buscarEdificio();
             case 3 -> funciones.eliminarEdificio();
-            //case 4 -> funciones.mostrarEdificios();
+            case 4 -> funciones.mostrarEdificios();
             case 5 -> menu.mostrarSubMenuDep();
             case 6 -> menu.mostrarMenu();
         }

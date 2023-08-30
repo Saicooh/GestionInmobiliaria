@@ -1,5 +1,4 @@
-import java.util.Map;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Edificio
 {

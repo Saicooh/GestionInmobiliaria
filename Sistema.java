@@ -4,6 +4,7 @@ import java.util.*;
 public class Sistema
 {
     public HashMap<String, Edificio> mapaEdificios;
+    private ArrayList<Edificio> listaEdificios = new ArrayList<>();
 
     public void agregarEdificio() throws IOException
     {
@@ -21,6 +22,7 @@ public class Sistema
         Edificio edificio = new Edificio(nombre, direccion, demanda);
 
         mapaEdificios.put(nombre, edificio);
+        listaEdificios.add(edificio);
 
         System.out.println("Se ha guardado el edificio correctamente");
     }
@@ -59,9 +61,22 @@ public class Sistema
         // Si existe, eliminar edificio del mapa y mostrar mensaje de éxito
     }
 
-    public void mostrarEdificios(boolean disponible) throws IOException
+    public void mostrarEdificios() throws IOException
     {
-        // Mostrar todos los edificios del mapa
+        if (listaEdificios.isEmpty())
+        {
+            System.out.println("No hay edificios");
+            return;
+        }
+
+        for (Edificio edificio : listaEdificios)
+        {
+            System.out.println("Nombre: " + edificio.getNombre());
+            System.out.println("Dirección: " + edificio.getDireccion());
+            System.out.println("Demanda: " + edificio.getDemanda());
+            System.out.println("Cantidad de departamentos: " + edificio.getCantidadDepartamentos());
+            System.out.println("Cantidad de departamentos disponibles: " + edificio.getCantidadDepartamentosDisponibles());
+        }
 
         // Si no hay edificios, mostrar mensaje de error
     }
