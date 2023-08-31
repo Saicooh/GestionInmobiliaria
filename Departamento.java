@@ -24,40 +24,19 @@ public class Departamento
         }
     }
 
-    public int getNumero()
-    {
-        return this.numero;
-    }
+    public int getNumero() { return this.numero; }
 
-    public int getCantidadHabitaciones()
-    {
-        return this.cantidadHabitaciones;
-    }
+    public int getCantidadHabitaciones() { return this.cantidadHabitaciones; }
 
-    public String getDisponible()
-    {
-        return this.disponible;
-    }
+    public String getDisponible() { return this.disponible; }
 
-    public String getNombreTipo()
-    {
-        return this.nombreTipo;
-    }
+    public String getNombreTipo() { return this.nombreTipo; }
 
-    public int getPrecio()
-    {
-        return this.precio;
-    }
+    public int getPrecio() { return this.precio; }
 
-    public void setNumero(int numero)
-    {
-        this.numero = numero;
-    }
+    public void setNumero(int numero) { this.numero = numero; }
 
-    public void setCantidadHabitaciones(int cantidadHabitaciones)
-    {
-        this.cantidadHabitaciones = cantidadHabitaciones;
-    }
+    public void setCantidadHabitaciones(int cantidadHabitaciones) { this.cantidadHabitaciones = cantidadHabitaciones; }
 
     public void setDisponible(boolean disponible)
     {
@@ -65,14 +44,7 @@ public class Departamento
         else this.disponible = "No Disponible";
     }
 
-    public void setPrecio(int precio)
-    {
-        this.precio = precio;
-    }
+    public void setPrecio(int precio) { this.precio = precio; }
 
-    public void setNombreTipo(String nombreTipo)
-    {
-        this.nombreTipo = nombreTipo;
-    }
-
+    public void setNombreTipo(String nombreTipo) { this.nombreTipo = nombreTipo;}
 }
