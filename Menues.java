@@ -99,11 +99,12 @@ public class Menues
         System.out.println("Seleccione una opcion: ");
 
         System.out.println("1. Agregar Departamento");
-        System.out.println("2. Eliminar Departamento");
-        System.out.println("3. Modificar disponibilidad de Departamento");
-        System.out.println("4. Mostrar Departamentos");
-        System.out.println("5. Mostrar Departamentos Disponibles");
-        System.out.println("6. Volver Menu Edificios");
+        System.out.println("2. Buscar Departamento");
+        System.out.println("3. Eliminar Departamento");
+        System.out.println("4. Modificar disponibilidad de Departamento");
+        System.out.println("5. Mostrar Departamentos");
+        System.out.println("6. Mostrar Departamentos Disponibles");
+        System.out.println("7. Volver Menu Edificios");
 
         while (true)
         {

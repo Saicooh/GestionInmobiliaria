@@ -159,8 +159,16 @@ public class Sistema
 
         if(respuesta.equals("s") || respuesta.equals("S") || respuesta.equals("si") || respuesta.equals("Si"))
         {
-            if(departamento.getDisponible().equals("Disponible")) departamento.setDisponible(false);
-            else departamento.setDisponible(true);
+            if(departamento.getDisponible().equals("Disponible"))
+            {
+                departamento.setDisponible(false);
+                edificio.setCantidadDepartamentosDisponibles(edificio.getCantidadDepartamentosDisponibles() - 1);
+            }
+            else
+            {
+                departamento.setDisponible(true);
+                edificio.setCantidadDepartamentosDisponibles(edificio.getCantidadDepartamentosDisponibles() + 1);
+            }
         }
     }
 

@@ -65,6 +65,11 @@ public class Departamento
         else this.disponible = "No Disponible";
     }
 
+    public void setPrecio(int precio)
+    {
+        this.precio = precio;
+    }
+
     public void setNombreTipo(String nombreTipo)
     {
         this.nombreTipo = nombreTipo;
