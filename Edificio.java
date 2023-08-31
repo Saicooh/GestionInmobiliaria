@@ -40,5 +40,5 @@ public class Edificio
 
     public void setDemanda(int demanda) { this.demanda = demanda; }
 
-    public void setCantidadDepartamentosDisponibles(int cantidadDepartamentos) { this.cantidadDepartamentosDisponibles = cantidadDepartamentosDisponibles; }
+    public void setCantidadDepartamentosDisponibles(int cantidadDepartamentosDisponibles) { this.cantidadDepartamentosDisponibles = cantidadDepartamentosDisponibles; }
 }

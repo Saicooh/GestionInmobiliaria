@@ -5,7 +5,9 @@ public class Departamento
     private String disponible;
     private String nombreTipo;
     private int precio;
-    public Departamento(int numero, int cantidadHabitaciones, String nombre) {
+
+    public Departamento(int numero, int cantidadHabitaciones, String nombre)
+    {
         this.numero = numero;
         this.cantidadHabitaciones = cantidadHabitaciones;
         this.nombreTipo = nombre;

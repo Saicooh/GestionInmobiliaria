@@ -4,7 +4,7 @@ import java.util.*;
 
 public class GestionInmobiliaria
 {
-    public static void main(String args[]) throws IOException
+    public static void main(String[] args) throws IOException
     {
 
         System.out.println("Bienvenido a la gestión inmobilaria");

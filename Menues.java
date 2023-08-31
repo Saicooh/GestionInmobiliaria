@@ -20,14 +20,14 @@ public class Menues
         {
             opcion = Integer.parseInt(Lector.readLine());
 
-            if(opcion != 1 && opcion != 2)
-                System.out.println("Ingrese una opcion valida");
+            if(opcion != 1 && opcion != 2) System.out.println("Ingrese una opcion valida");
             else break;
         }
 
         switch (opcion)
         {
-            case 1 -> {
+            case 1 ->
+            {
                 System.out.println("Ingresando al sistema de gestión inmobiliaria");
                 menu.mostrarMenuSistema();
             }
@@ -58,52 +58,35 @@ public class Menues
         System.out.println("5. Administrar Departamentos");
         System.out.println("6. Volver Menu Principal");
 
-        while(true)
+        while (true)
         {
             opcion = Integer.parseInt(Lector.readLine());
 
-            if(opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4 && opcion != 5 && opcion != 6)
-                System.out.println("Ingrese una opcion valida");
+            if (opcion < 1 || opcion > 6) System.out.println("Ingrese una opcion valida");
             else break;
         }
 
-        switch(opcion)
+        switch (opcion)
         {
-            case 1 -> {
-                funciones.agregarEdificio();
-                menu.mostrarMenuSistema();
-            }
-            case 2 -> {
-                funciones.buscarEdificio();
-                menu.mostrarMenuSistema();
-            }
-            case 3 -> {
-                funciones.eliminarEdificio();
-                menu.mostrarMenuSistema();
-            }
-            case 4 -> {
-                funciones.mostrarEdificios();
-                menu.mostrarMenuSistema();
-            }
-            case 5 -> {
-
+            case 1 -> funciones.agregarEdificio();
+            case 2 -> funciones.buscarEdificio();
+            case 3 -> funciones.eliminarEdificio();
+            case 4 -> funciones.mostrarEdificios();
+            case 5 ->
+            {
                 System.out.println("Ingrese el nombre del edificio: ");
-
                 String nombre = Lector.readLine();
 
                 Edificio edificio = Sistema.mapaEdificios.get(nombre);
 
-                if(edificio == null)
-                {
-                    //validar si extiste
-                }
-
-                menu.mostrarSubMenuDep(edificio);
-
+                if (edificio == null) System.out.println("El edificio no existe");
+                else menu.mostrarSubMenuDep(edificio);
             }
             case 6 -> menu.mostrarMenu();
+            default -> System.out.println("Opción inválida");
         }
 
+        menu.mostrarMenuSistema();
     }
 
     public void mostrarSubMenuDep(Edificio edificio) throws IOException
@@ -122,39 +105,27 @@ public class Menues
         System.out.println("5. Mostrar Departamentos Disponibles");
         System.out.println("6. Volver Menu Edificios");
 
-        while(true)
+        while (true)
         {
             opcion = Integer.parseInt(Lector.readLine());
 
-            if(opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4 && opcion != 5 && opcion != 6)
-                System.out.println("Ingrese una opcion valida");
+            if (opcion < 1 || opcion > 7) System.out.println("Ingrese una opcion valida");
             else break;
         }
 
-        switch(opcion)
+        switch (opcion)
         {
-            case 1 -> {
-                funciones.agregarDepartamento(edificio);
-                menu.mostrarSubMenuDep(edificio);
-            }
-            case 2 -> {
-                funciones.eliminarDepartamento(edificio);
-                menu.mostrarSubMenuDep(edificio);
-
-            }
-            case 3 -> {
-                funciones.disponibilidadDepartamento(edificio);
-                menu.mostrarSubMenuDep(edificio);
-            }
-            case 4 -> {
-                funciones.mostrarDepartamentos(edificio);
-                menu.mostrarSubMenuDep(edificio);
-            }
-            case 5 -> {
-                funciones.mostrarDepartamentosDisponibles(edificio);
-                menu.mostrarSubMenuDep(edificio);
-            }
-            case 6 -> menu.mostrarMenuSistema();
+            case 1 -> funciones.agregarDepartamento(edificio);
+            case 2 -> funciones.buscarDepartamento(edificio);
+            case 3 -> funciones.eliminarDepartamento(edificio);
+            case 4 -> funciones.disponibilidadDepartamento(edificio);
+            case 5 -> funciones.mostrarDepartamentos(edificio);
+            case 6 -> funciones.mostrarDepartamentosDisponibles(edificio);
+            case 7 -> menu.mostrarMenuSistema();
+            default -> System.out.println("Opción inválida");
         }
+
+        menu.mostrarSubMenuDep(edificio);
+
     }
 }
