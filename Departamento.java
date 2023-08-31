@@ -2,15 +2,24 @@ public class Departamento
 {
     private int numero;
     private int cantidadHabitaciones;
-    private boolean disponible;
-    private Tipo tipo;
-
-    public Departamento(int numero, int cantidadHabitaciones,String nombreTipo)
-    {
+    private String disponible;
+    private String nombreTipo;
+    private int precio;
+    public Departamento(int numero, int cantidadHabitaciones, String nombre) {
         this.numero = numero;
         this.cantidadHabitaciones = cantidadHabitaciones;
-        this.disponible = true;
-        this.tipo = new Tipo(nombreTipo);
+        this.nombreTipo = nombre;
+        this.disponible = "Disponible";
+
+        switch (nombre)
+        {
+            case "A" -> this.precio = 100000;
+            case "B" -> this.precio = 80000;
+            case "C" -> this.precio = 60000;
+            case "D" -> this.precio = 40000;
+            case "E" -> this.precio = 20000;
+            default -> this.precio = 0;
+        }
     }
 
     public int getNumero()
@@ -23,9 +32,19 @@ public class Departamento
         return this.cantidadHabitaciones;
     }
 
-    public boolean getDisponible()
+    public String getDisponible()
     {
         return this.disponible;
+    }
+
+    public String getNombreTipo()
+    {
+        return this.nombreTipo;
+    }
+
+    public int getPrecio()
+    {
+        return this.precio;
     }
 
     public void setNumero(int numero)
@@ -38,10 +57,15 @@ public class Departamento
         this.cantidadHabitaciones = cantidadHabitaciones;
     }
 
-    public void getTipo()
+    public void setDisponible(boolean disponible)
     {
-        this.tipo.getNombre();
-        this.tipo.getPrecio();
+        if(disponible) this.disponible = "Disponible";
+        else this.disponible = "No Disponible";
+    }
+
+    public void setNombreTipo(String nombreTipo)
+    {
+        this.nombreTipo = nombreTipo;
     }
 
 }

@@ -98,7 +98,7 @@ public class Menues
                     //validar si extiste
                 }
 
-                menu.mostrarSubMenuDep(/*Poner el string*/);
+                menu.mostrarSubMenuDep(edificio);
 
             }
             case 6 -> menu.mostrarMenu();
@@ -106,7 +106,7 @@ public class Menues
 
     }
 
-    public void mostrarSubMenuDep() throws IOException
+    public void mostrarSubMenuDep(Edificio edificio) throws IOException
     {
         BufferedReader Lector = new BufferedReader(new InputStreamReader(System.in));
         Sistema funciones = new Sistema();
@@ -116,8 +116,8 @@ public class Menues
         System.out.println("Seleccione una opcion: ");
 
         System.out.println("1. Agregar Departamento");
-        System.out.println("2. Buscar Departamento");
-        System.out.println("3. Eliminar Departamento");
+        System.out.println("2. Eliminar Departamento");
+        System.out.println("3. Modificar disponibilidad de Departamento");
         System.out.println("4. Mostrar Departamentos");
         System.out.println("5. Mostrar Departamentos Disponibles");
         System.out.println("6. Volver Menu Edificios");
@@ -134,24 +134,25 @@ public class Menues
         switch(opcion)
         {
             case 1 -> {
-                funciones.agregarDepartamento();
-                menu.mostrarSubMenuDep();
+                funciones.agregarDepartamento(edificio);
+                menu.mostrarSubMenuDep(edificio);
             }
             case 2 -> {
-                funciones.buscarDepartamento();
-                menu.mostrarSubMenuDep();
+                funciones.eliminarDepartamento(edificio);
+                menu.mostrarSubMenuDep(edificio);
+
             }
             case 3 -> {
-                funciones.eliminarDepartamento();
-                menu.mostrarSubMenuDep();
+                funciones.disponibilidadDepartamento(edificio);
+                menu.mostrarSubMenuDep(edificio);
             }
             case 4 -> {
-                funciones.mostrarDepartamentos();
-                menu.mostrarSubMenuDep();
+                funciones.mostrarDepartamentos(edificio);
+                menu.mostrarSubMenuDep(edificio);
             }
             case 5 -> {
-                funciones.mostrarDepartamentosDisponibles();
-                menu.mostrarSubMenuDep();
+                funciones.mostrarDepartamentosDisponibles(edificio);
+                menu.mostrarSubMenuDep(edificio);
             }
             case 6 -> menu.mostrarMenuSistema();
         }
