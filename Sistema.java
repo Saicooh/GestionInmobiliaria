@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Sistema
 {
-    public static HashMap<String, Edificio> mapaEdificios = new HashMap<>();
+    public static HashMap<String, Edificio> mapaEdificios = new HashMap<>(100, 0.75f);
     private static ArrayList<Edificio> listaEdificios = new ArrayList<>();
 
     public void agregarEdificio() throws IOException
@@ -37,14 +37,7 @@ public class Sistema
 
         Edificio edificio = mapaEdificios.get(nombre);
 
-        if (edificio != null)
-        {
-            System.out.println("Nombre: " + edificio.getNombre());
-            System.out.println("Dirección: " + edificio.getDireccion());
-            System.out.println("Demanda: " + edificio.getDemanda());
-            System.out.println("Cantidad de departamentos: " + edificio.getCantidadDepartamentos());
-            System.out.println("Cantidad de departamentos disponibles: " + edificio.getCantidadDepartamentosDisponibles());
-        }
+        if (edificio != null) System.out.println(edificio.getInformacionCompleta());
         else System.out.println("El edificio no existe en el mapa.");
     }
 
@@ -60,155 +53,81 @@ public class Sistema
 
         if (edificio != null)
         {
-            mapaEdificios.remove(nombre);
-            listaEdificios.remove(edificio);
+            System.out.println("¿Está seguro de que desea eliminar el edificio '" + nombre + "'? (s/n)");
+            String confirmacion = Lector.readLine().trim();
 
-            System.out.println("Se ha eliminado el edificio correctamente");
+            if (confirmacion.equalsIgnoreCase("s"))
+            {
+                mapaEdificios.remove(nombre);
+                listaEdificios.remove(edificio);
+
+                System.out.println("Se ha eliminado el edificio correctamente");
+            }
+            else System.out.println("No se hizo ningún cambio");
         }
         else System.out.println("El edificio no existe en el mapa.");
     }
 
-    public void mostrarEdificios() throws IOException
+    public void mostrarEdificios()
     {
-        if (listaEdificios.isEmpty())
-        {
-            System.out.println("No hay edificios");
-            return;
-        }
-
-        for (Edificio edificio : listaEdificios)
-        {
-            System.out.println("Nombre: " + edificio.getNombre());
-            System.out.println("Dirección: " + edificio.getDireccion());
-            System.out.println("Demanda: " + edificio.getDemanda());
-            System.out.println("Cantidad de departamentos: " + edificio.getCantidadDepartamentos());
-            System.out.println("Cantidad de departamentos disponibles: " + edificio.getCantidadDepartamentosDisponibles());
-        }
-    }
-
-    public void agregarDepartamento(Edificio edificio) throws IOException
-    {
-        BufferedReader Lector = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println("Ingrese la cantidad de departamentos que quiere agregar:");
-        int cantidadIngresar = Integer.parseInt(Lector.readLine());
-
-        System.out.println("Ingrese la cantidad de habitaciones");
-        int cantidadDeHabitaciones = Integer.parseInt(Lector.readLine());
-        System.out.println("Ingrese el nombre del tipo de departamento: ");
-        String nombreTipo = Lector.readLine();
-
-        for(int i = 0; i < cantidadIngresar; i++)
-        {
-            int numero = edificio.getCantidadDepartamentos() + 1;
-            Departamento departamento = new Departamento(numero, cantidadDeHabitaciones, nombreTipo);
-
-            edificio.getDepartamentos().add(departamento);
-            edificio.setCantidadDepartamentos(edificio.getCantidadDepartamentos()+1);
-            edificio.setCantidadDepartamentosDisponibles(edificio.getCantidadDepartamentosDisponibles()+1);
-        }
-    }
-    public void eliminarDepartamento(Edificio edificio) throws IOException
-    {
-        // Pedir número de departamento
-        BufferedReader Lector = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println("Ingrese el numero del departamento: ");
-        int numero = Integer.parseInt(Lector.readLine());
-
-        Departamento departamento = edificio.getDepartamentos().get(numero - 1);
-
-        if(edificio.getCantidadDepartamentos() < numero) System.out.println("El departamento buscado no existe");
+        if (listaEdificios.isEmpty()) System.out.println("No hay edificios");
         else
         {
-            edificio.setCantidadDepartamentos(edificio.getCantidadDepartamentos() - 1);
-            if(departamento.getDisponible().equals("Disponible")) edificio.setCantidadDepartamentosDisponibles(edificio.getCantidadDepartamentosDisponibles() - 1);
-            edificio.getDepartamentos().remove(numero - 1);
-        }
-    }
-
-    public void buscarDepartamento(Edificio edificio) throws IOException
-    {
-        BufferedReader Lector = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println("Ingrese el número del departamento: ");
-
-        int numero = Integer.parseInt(Lector.readLine());
-
-        Departamento departamento = edificio.getDepartamentos().get(numero-1);
-
-        System.out.println("Numero de Departamento: " + departamento.getNumero());
-        System.out.println("Cantidad de habitaciones: " + departamento.getCantidadHabitaciones());
-        System.out.println("Tipo de Departamento: " + departamento.getNombreTipo());
-        System.out.println("Precio: " + (departamento.getPrecio() * edificio.getDemanda()));
-        System.out.println("Disponibilidad: " + departamento.getDisponible());
-        System.out.println(" ");
-    }
-    public void disponibilidadDepartamento(Edificio edificio) throws IOException
-    {
-        BufferedReader Lector = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println("Ingrese el numero del departamento: ");
-        int numero = Integer.parseInt(Lector.readLine());
-
-        System.out.println("El departamento está " + edificio.getDepartamentos().get(numero-1).getDisponible());
-        System.out.println("Desea cambiar el estado del departamento? (s/n)");
-        String respuesta = Lector.readLine();
-
-        Departamento departamento = edificio.getDepartamentos().get(numero-1);
-
-        if(respuesta.equals("s") || respuesta.equals("S") || respuesta.equals("si") || respuesta.equals("Si"))
-        {
-            if(departamento.getDisponible().equals("Disponible"))
+            System.out.println("Lista de Edificios:\n");
+            for (Edificio edificio : listaEdificios)
             {
-                departamento.setDisponible(false);
-                edificio.setCantidadDepartamentosDisponibles(edificio.getCantidadDepartamentosDisponibles() - 1);
+                System.out.println(edificio.getInformacionCompleta());
+                System.out.println("--------------------------------");
             }
-            else
-            {
-                departamento.setDisponible(true);
-                edificio.setCantidadDepartamentosDisponibles(edificio.getCantidadDepartamentosDisponibles() + 1);
-            }
+            System.out.println("Total de edificios: " + listaEdificios.size());
         }
     }
-
-    public void mostrarDepartamentos(Edificio edificio) throws IOException
-    {
-        for(int i = 0; i < edificio.getCantidadDepartamentos(); i++)
-        {
-            Departamento departamento = edificio.getDepartamentos().get(i);
-            System.out.println("Numero de Departamento: " + departamento.getNumero());
-            System.out.println("Cantidad de habitaciones: " + departamento.getCantidadHabitaciones());
-            System.out.println("Tipo de Departamento: " + departamento.getNombreTipo());
-            System.out.println("Precio: " + (departamento.getPrecio() * edificio.getDemanda()));
-            System.out.println("Disponibilidad: " + departamento.getDisponible());
-            System.out.println(" ");
-        }
-    }
-
-    public void mostrarDepartamentosDisponibles(Edificio edificio) throws IOException
-    {
-        if(edificio.getCantidadDepartamentosDisponibles() == 0)
-        {
-            System.out.println("No hay departamentos disponibles");
-            return;
-        }
-
-        for(int i = 0; i < edificio.getCantidadDepartamentos(); i++)
-        {
-            Departamento departamento = edificio.getDepartamentos().get(i);
-
-            if(departamento.getDisponible().equals("Disponible"))
-            {
-                System.out.println("Numero de Departamento: " + departamento.getNumero());
-                System.out.println("Cantidad de habitaciones: " + departamento.getCantidadHabitaciones());
-                System.out.println("Tipo de Departamento: " + departamento.getNombreTipo());
-                System.out.println("Precio: " + departamento.getPrecio());
-                System.out.println("Disponible: " + departamento.getDisponible());
-                System.out.println(" ");
-            }
-        }
-    }
-
     public HashMap<String, Edificio> getMapaEdificios() { return this.mapaEdificios; }
+
+    public static void datosIniciales(String rutaCSV) throws IOException
+    {
+        List<String> tipos = Arrays.asList("A", "B", "C", "D", "E");
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(rutaCSV)))
+        {
+            reader.readLine();
+            String linea;
+
+            while ((linea = reader.readLine()) != null)
+            {
+                String[] partes = linea.split(",");
+
+                if (partes.length != 4)
+                {
+                    System.err.println("Formato de línea CSV incorrecto: " + linea);
+                    continue;
+                }
+
+                String nombre = partes[0];
+                String direccion = partes[1];
+
+                int demanda = Integer.parseInt(partes[2]);
+                int cantidadDepartamentos = Integer.parseInt(partes[3]);
+
+                Edificio edificio = new Edificio(nombre, direccion, demanda);
+
+                for (int i = 0; i < cantidadDepartamentos; i++)
+                {
+                    int cantidadHabitaciones = new Random().nextInt(4) + 1;
+                    String tipo = tipos.get(new Random().nextInt(tipos.size()));
+                    int numero = i + 1;
+
+                    Departamento departamento = new Departamento(numero, cantidadHabitaciones, tipo);
+                    edificio.getDepartamentos().add(departamento);
+                }
+
+                edificio.setCantidadDepartamentos(cantidadDepartamentos);
+                edificio.setCantidadDepartamentosDisponibles(cantidadDepartamentos);
+
+                mapaEdificios.put(nombre, edificio);
+                listaEdificios.add(edificio);
+            }
+        }
+        catch (IOException e) { System.err.println("Error al leer el archivo CSV: " + e.getMessage()); }
+    }
 }

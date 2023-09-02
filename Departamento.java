@@ -34,13 +34,15 @@ public class Departamento
 
     public int getPrecio() { return this.precio; }
 
+    public String getInformacionCompleta() { return "Numero: " + numero + "\nCantidad de habitaciones: " + cantidadHabitaciones + "\nTipo: " + nombreTipo + "\nPrecio: " + precio + "\nDisponibilidad: " + disponible; }
+
     public void setNumero(int numero) { this.numero = numero; }
 
     public void setCantidadHabitaciones(int cantidadHabitaciones) { this.cantidadHabitaciones = cantidadHabitaciones; }
 
     public void setDisponible(boolean disponible)
     {
-        if(disponible) this.disponible = "Disponible";
+        if (disponible) this.disponible = "Disponible";
         else this.disponible = "No Disponible";
     }
 

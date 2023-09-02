@@ -3,10 +3,13 @@ import java.util.*;
 
 public class Menues
 {
+
     public void mostrarMenu() throws IOException
     {
         BufferedReader Lector = new BufferedReader(new InputStreamReader(System.in));
+        Sistema funciones = new Sistema();
         Menues menu = new Menues();
+
         int opcion;
 
         System.out.println("Seleccione una opcion: ");
@@ -47,6 +50,7 @@ public class Menues
         BufferedReader Lector = new BufferedReader(new InputStreamReader(System.in));
         Sistema funciones = new Sistema();
         Menues menu = new Menues();
+
         int opcion;
 
         System.out.println("Seleccione una opcion: ");
@@ -89,12 +93,12 @@ public class Menues
         menu.mostrarMenuSistema();
     }
 
-    public void mostrarSubMenuDep(Edificio edificio) throws IOException
+    public void mostrarMenuSistema(Edificio edificio) throws IOException
     {
         BufferedReader Lector = new BufferedReader(new InputStreamReader(System.in));
-        Sistema funciones = new Sistema();
-        Menues menu = new Menues();
         int opcion;
+
+        Menues menu = new Menues();
 
         System.out.println("Seleccione una opcion: ");
 
@@ -126,7 +130,6 @@ public class Menues
             default -> System.out.println("Opción inválida");
         }
 
-        menu.mostrarSubMenuDep(edificio);
-
+        menu.mostrarMenuSistema(edificio);
     }
 }
