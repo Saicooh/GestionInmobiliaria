@@ -84,7 +84,7 @@ public class Menues
                 Edificio edificio = Sistema.mapaEdificios.get(nombre);
 
                 if (edificio == null) System.out.println("El edificio no existe");
-                else menu.mostrarSubMenuDep(edificio);
+                else menu.mostrarMenuSistema(edificio);
             }
             case 6 -> menu.mostrarMenu();
             default -> System.out.println("Opción inválida");
@@ -120,12 +120,21 @@ public class Menues
 
         switch (opcion)
         {
-            case 1 -> funciones.agregarDepartamento(edificio);
-            case 2 -> funciones.buscarDepartamento(edificio);
-            case 3 -> funciones.eliminarDepartamento(edificio);
-            case 4 -> funciones.disponibilidadDepartamento(edificio);
-            case 5 -> funciones.mostrarDepartamentos(edificio);
-            case 6 -> funciones.mostrarDepartamentosDisponibles(edificio);
+            case 1 -> edificio.agregarDepartamento(edificio);
+            case 2 ->
+            {
+                if (edificio.getCantidadDepartamentos() == 0) System.out.println("No hay departamentos en el edificio");
+                else
+                {
+                    System.out.println("Ingrese el número del departamento: ");
+                    int numero = Integer.parseInt(Lector.readLine());
+                    edificio.mostrarDepartamentos(edificio, numero);
+                }
+            }
+            case 3 -> edificio.eliminarDepartamento(edificio);
+            case 4 -> edificio.disponibilidadDepartamento(edificio);
+            case 5 -> edificio.mostrarDepartamentos(edificio);
+            case 6 -> edificio.mostrarDepartamentosDisponibles(edificio);
             case 7 -> menu.mostrarMenuSistema();
             default -> System.out.println("Opción inválida");
         }
