@@ -13,6 +13,12 @@ public class Sistema
         System.out.println("Ingrese el nombre del edificio: ");
         String nombre = Lector.readLine();
 
+        if (mapaEdificios.containsKey(nombre))
+        {
+            System.out.println("Ya existe un edificio con ese nombre.");
+            return;
+        }
+
         System.out.println("Ingrese la dirección del edificio: ");
         String direccion = Lector.readLine();
 
