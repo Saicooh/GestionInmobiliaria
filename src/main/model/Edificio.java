@@ -1,3 +1,5 @@
+package src.main.model;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,7 +11,7 @@ public class Edificio
     private String direccion;
     private int cantidadDepartamentos;
     private int cantidadDepartamentosDisponibles;
-    private ArrayList<Departamento> departamentos;
+    private final ArrayList<Departamento> departamentos;
     private int demanda;
 
     public Edificio(String nombre, String direccion, int demanda)
@@ -22,55 +24,38 @@ public class Edificio
         this.demanda = demanda;
     }
 
-    public void agregarDepartamento(Edificio edificio) throws IOException
+    public void agregarDepartamento(int cantidadIngresar, int cantidadDeHabitaciones, String nombreTipo)
     {
-        BufferedReader Lector = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println("Ingrese la cantidad de departamentos que quiere agregar:");
-        int cantidadIngresar = Integer.parseInt(Lector.readLine());
-
-        if (cantidadIngresar < 1)
-        {
-            System.out.println("La cantidad de departamentos debe ser mayor a 0");
-            return;
-        }
-
-        System.out.println("Ingrese la cantidad de habitaciones");
-        int cantidadDeHabitaciones = Integer.parseInt(Lector.readLine());
-        System.out.println("Ingrese el nombre del tipo de departamento: ");
-        String nombreTipo = Lector.readLine();
-
         for (int i = 0; i < cantidadIngresar; i++)
         {
-            int numero = edificio.getCantidadDepartamentos() + 1;
+            int numero = this.getCantidadDepartamentos() + 1;
             Departamento departamento = new Departamento(numero, cantidadDeHabitaciones, nombreTipo);
 
-            edificio.getDepartamentos().add(departamento);
-            edificio.setCantidadDepartamentos(edificio.getCantidadDepartamentos() + 1);
-            edificio.setCantidadDepartamentosDisponibles(edificio.getCantidadDepartamentosDisponibles() + 1);
+            this.getDepartamentos().add(departamento);
+            this.setCantidadDepartamentos(this.getCantidadDepartamentos() + 1);
+            this.setCantidadDepartamentosDisponibles(this.getCantidadDepartamentosDisponibles() + 1);
         }
     }
 
-    public void eliminarDepartamento(Edificio edificio) throws IOException
+    public Departamento buscarDepartamento(int numero)
     {
-        BufferedReader Lector = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println("Ingrese el numero del departamento: ");
-        int numero = Integer.parseInt(Lector.readLine());
-
-        int indiceDepartamento = numero - 1;
-        Departamento departamento = edificio.getDepartamentos().get(indiceDepartamento);
-
-        if (edificio.getCantidadDepartamentos() < numero) System.out.println("El departamento buscado no existe");
-        else
+        for (Departamento depto : departamentos)
         {
-            edificio.setCantidadDepartamentos(edificio.getCantidadDepartamentos() - 1);
-
-            if (departamento.getDisponible().equals("Disponible"))
-                edificio.setCantidadDepartamentosDisponibles(edificio.getCantidadDepartamentosDisponibles() - 1);
-
-            edificio.getDepartamentos().remove(indiceDepartamento);
+            if (depto.getNumero() == numero) return depto;
         }
+        return null;
+    }
+
+    public boolean eliminarDepartamento(int numero)
+    {
+        for (Departamento depto : departamentos)
+        {
+            if (depto.getNumero() == numero) {
+                departamentos.remove(depto);
+                return true;
+            }
+        }
+        return false;
     }
 
     public void mostrarDepartamentos(Edificio edificio, int numero)

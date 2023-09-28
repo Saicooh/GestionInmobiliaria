@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.main.controladores.BuscarDepartamentoController">
+
+    <Label text="Buscar Departamento" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+    <HBox spacing="10" alignment="BASELINE_CENTER">
+        <Label text="Número  " style="-fx-font-weight: bold;" />
+        <TextField fx:id="numeroDepartamentoField" promptText="Número del departamento" />
+    </HBox>
+
+    <Button fx:id="buscarButton" text="Buscar" onAction="#buscarDepartamento" />
+
+    <Label fx:id="datosDepartamentoLabel2" style="-fx-font-weight: bold;"/>
+    <Label fx:id="datosDepartamentoLabel" style="-fx-font-weight: bold;"/>
+
+</VBox>

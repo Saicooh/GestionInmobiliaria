@@ -1,3 +1,5 @@
+package src.main.model;
+
 public class Departamento
 {
     private int numero;

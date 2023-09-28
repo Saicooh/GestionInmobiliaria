@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="src.main.controladores.AgEdificioController"
+      alignment="CENTER"
+      spacing="10">
+
+    <Label text="Agregar Edificio" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+    <HBox spacing="10" alignment="BASELINE_CENTER">
+        <Label text="Nombre:  " style="-fx-font-weight: bold;" />
+        <TextField fx:id="nombreEdificioTextField" />
+    </HBox>
+
+    <HBox spacing="10" alignment="BASELINE_CENTER">
+        <Label text="Dirección:" style="-fx-font-weight: bold;" />
+        <TextField fx:id="direccionTextField" />
+    </HBox>
+
+    <HBox spacing="10" alignment="BASELINE_CENTER">
+        <Label text="Demanda:" style="-fx-font-weight: bold;" />
+        <TextField fx:id="demandaTextField" />
+    </HBox>
+
+    <Button fx:id="agregarButton" text="Agregar" onAction="#agregarEdificio" style="-fx-font-size: 16px;"/>
+
+</VBox>
+<!-- hola -->

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Label?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="src.main.controladores.MenuEdificioController"
+      alignment="CENTER"
+      spacing="8">
+
+    <Label text="Menú Principal">
+        <font>
+            <Font size="24"/>
+        </font>
+    </Label>
+
+    <Button text="Agregar Edificio" onAction="#agregarEdificio" />
+    <Button text="Buscar Edificio" onAction="#buscarEdificio" />
+    <Button text="Eliminar Edificio" onAction="#eliminarEdificio" />
+    <Button text="Mostrar Edificios" onAction="#mostrarEdificios" />
+    <Button fx:id="administrarDepartamentosButton" text="Administrar Departamentos" onAction="#administrarDepartamentos" />
+    <Button text="Volver al Inicio" onAction="#inicio" />
+
+</VBox>

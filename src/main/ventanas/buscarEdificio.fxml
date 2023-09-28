@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.main.controladores.BuscarEdificioController">
+
+    <Label text="Buscar Edificio" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+    <HBox spacing="10" alignment="BASELINE_CENTER">
+        <Label text="Nombre:  " style="-fx-font-weight: bold;" />
+        <TextField fx:id="nombreEdificioField" promptText="Nombre del edificio" />
+    </HBox>
+
+    <Button fx:id="buscarButton" text="Buscar" onAction="#buscarEdificio" />
+
+    <Label fx:id="datosEdificioLabel2" style="-fx-font-weight: bold;"/>
+    <Label fx:id="datosEdificioLabel" style="-fx-font-weight: bold;"/>
+
+</VBox>
