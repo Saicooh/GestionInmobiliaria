@@ -8,8 +8,8 @@ package src.main.resources.excepciones;
 
 public class ArgumentoIlegalException extends Exception
 {
-    public ArgumentoIlegalException(String message)
+    public ArgumentoIlegalException()
     {
-        super(message);
+        super("Por favor ingresa un número válido.");
     }
 }

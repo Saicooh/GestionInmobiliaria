@@ -7,11 +7,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import src.main.model.Departamento;
 import src.main.model.Edificio;
+import src.main.resources.UtilidadAlertas;
+import src.main.resources.excepciones.FaltaDatosException;
 import src.main.resources.excepciones.NoDepartamentoException;
 
-import java.io.IOException;
-
-public class BuscarDepartamentoController
+public class BuscarDepartamentoController implements ControladorConEdificio
 {
 
     @FXML
@@ -35,6 +35,8 @@ public class BuscarDepartamentoController
         {
             int numero = Integer.parseInt(numeroDepartamentoField.getText());
 
+            if (numeroDepartamentoField.getText().isEmpty()) throw new FaltaDatosException();
+
             Departamento departamentoAuxiliar = edificioActual.buscarDepartamento(numero);
 
             String datosDepartamento = departamentoAuxiliar.getInformacionCompleta();
@@ -46,18 +48,18 @@ public class BuscarDepartamentoController
         }
         catch (NumberFormatException e)
         {
-            if (numeroDepartamentoField.getText().isEmpty())
-            {
-                ManejadorExcepciones.handleException(new Exception("Error"), "El número de departamento no puede estar vacío.");
-                datosDepartamentoLabel2.setText("Ingresa un departamento válido");
-            }
-            else ManejadorExcepciones.handleException(new Exception("Error"), "El número de departamento debe ser un número.");
+            UtilidadAlertas.alertaError("Error", "El número de departamento debe ser un número entero.");
         }
         catch (NoDepartamentoException e)
         {
-            ManejadorExcepciones.handleException(new Exception("Error"), e.getMessage());
+            UtilidadAlertas.alertaError("Error", e.getMessage());
             datosDepartamentoLabel2.setText("Resultados:");
             datosDepartamentoLabel.setText("Departamento no encontrado.");
+        }
+        catch (FaltaDatosException e)
+        {
+            UtilidadAlertas.alertaError("Error", e.getMessage());
+            datosDepartamentoLabel2.setText("Ingresa un departamento válido");
         }
 
     }

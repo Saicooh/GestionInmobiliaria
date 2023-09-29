@@ -8,6 +8,7 @@ import src.main.model.Sistema;
 import src.main.resources.Constantes;
 import src.main.resources.UtilidadAlertas;
 import src.main.resources.excepciones.ArgumentoDuplicadoException;
+import src.main.resources.excepciones.FaltaDatosException;
 
 import java.io.IOException;
 
@@ -27,7 +28,7 @@ public class AgEdificioController
     private Button agregarButton;
 
     @FXML
-    private void agregarEdificio()
+    private void agregarEdificio() throws FaltaDatosException
     {
         // Obtén los valores del nombre del edificio y el número de pisos desde los campos de texto
         String nombreEdificio = nombreEdificioTextField.getText();
@@ -37,8 +38,7 @@ public class AgEdificioController
         // Validación simple: Verifica que los campos no estén vacíos
         if (nombreEdificio.isEmpty() || direccion.isEmpty() || demanda.isEmpty())
         {
-            ManejadorExcepciones.handleException(new Exception("Error"), "Por favor, ingresa todos los datos.");
-            return;
+            throw new FaltaDatosException();
         }
 
         try

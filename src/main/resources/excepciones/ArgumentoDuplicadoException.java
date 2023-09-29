@@ -2,8 +2,8 @@ package src.main.resources.excepciones;
 
 public class ArgumentoDuplicadoException extends Exception
 {
-    public ArgumentoDuplicadoException(String message)
+    public ArgumentoDuplicadoException(String item)
     {
-        super(message);
+        super("El elemento " + item + " ya existe");
     }
 }

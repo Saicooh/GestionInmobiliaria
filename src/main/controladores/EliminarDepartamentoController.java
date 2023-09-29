@@ -12,7 +12,7 @@ import src.main.resources.excepciones.NoDepartamentoException;
 
 import java.io.IOException;
 
-public class EliminarDepartamentoController
+public class EliminarDepartamentoController implements ControladorConEdificio
 {
 
     @FXML
@@ -53,5 +53,11 @@ public class EliminarDepartamentoController
         }
 
         Sistema.guardarEnCSV(Constantes.getCSV());
+    }
+
+    @Override
+    public void setEdificioActual(Edificio edificio)
+    {
+        this.edificio = edificio;
     }
 }

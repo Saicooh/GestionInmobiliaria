@@ -1,6 +1,5 @@
 package src.main.controladores;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,22 +10,39 @@ import javafx.stage.Stage;
 import src.main.model.Edificio;
 import src.main.model.Sistema;
 import src.main.resources.Constantes;
+import src.main.resources.UtilidadAlertas;
 import src.main.resources.excepciones.FaltaDatosException;
 import src.main.resources.excepciones.NoEdificioException;
 
 import java.io.IOException;
+import java.util.function.Consumer;
 
 public class MenuDepartamentosController
 {
+    private Edificio edificio;
     @FXML
     public TextField nombreEdTextField;
 
+    private void operacionDepartamento(String fxmlResource, String titulo, Consumer<ControladorConEdificio> configuracion)
+    {
+        try
+        {
+            validarNombreEdificio();
+            edificio = obtenerEdificioValidado(nombreEdTextField.getText());
+            ControladorConEdificio controller = mostrarVentana(fxmlResource, titulo);
+            configuracion.accept(controller);
+        }
+        catch (NoEdificioException | FaltaDatosException | IOException e)
+        {
+            UtilidadAlertas.alertaError("Error", e.getMessage());
+        }
+    }
     @FXML
     private Edificio obtenerEdificioValidado(String nombre) throws NoEdificioException, FaltaDatosException
     {
         Edificio edificioAux = Sistema.buscarEdificio(nombre);
 
-        if (nombre.isEmpty()) throw new FaltaDatosException("El nombre del edificio no puede estar vacío.");
+        if (nombre.isEmpty()) throw new FaltaDatosException();
 
         return edificioAux;
     }
@@ -46,47 +62,26 @@ public class MenuDepartamentosController
         return loader.getController();
     }
 
-    public void agregarDepartamento()
+    private void validarNombreEdificio() throws FaltaDatosException
     {
-        try
-        {
-            Edificio edificio = obtenerEdificioValidado(nombreEdTextField.getText());
-            AgregarDepartamentoController controller = mostrarVentana(Constantes.getAgregarDepartamentos(), "Agregar Departamento");
-            controller.setEdificioActual(edificio);
-        }
-        catch (NoEdificioException | FaltaDatosException | IOException e)
-        {
-            ManejadorExcepciones.handleException(e, e.getMessage());
-        }
+        if (nombreEdTextField.getText().isEmpty()) throw new FaltaDatosException();
+    }
+
+    @FXML
+    private void agregarDepartamento()
+    {
+        operacionDepartamento(Constantes.getAgregarDepartamentos(), "Agregar Departamento", controller -> controller.setEdificioActual(edificio));
     }
 
     public void buscarDepartamento()
     {
-        try
-        {
-            Edificio edificio = obtenerEdificioValidado(nombreEdTextField.getText());
-            BuscarDepartamentoController buscar = mostrarVentana(Constantes.getBuscarDepartamentos(), "Buscar Departamento");
-            buscar.setEdificioActual(edificio);
-        }
-        catch (NoEdificioException | FaltaDatosException | IOException e)
-        {
-            ManejadorExcepciones.handleException(e, e.getMessage());
-        }
+        operacionDepartamento(Constantes.getBuscarDepartamentos(), "Buscar Departamento", controller -> controller.setEdificioActual(edificio));
     }
 
     @FXML
     private void eliminarDepartamento()
     {
-        try
-        {
-            Edificio edificio = obtenerEdificioValidado(nombreEdTextField.getText());
-            EliminarDepartamentoController eliminar = mostrarVentana(Constantes.getEliminarDepartamentos(), "Eliminar Departamento");
-            eliminar.setEdificio(edificio);
-        }
-        catch (NoEdificioException | FaltaDatosException | IOException e)
-        {
-            ManejadorExcepciones.handleException(e, e.getMessage());
-        }
+        operacionDepartamento(Constantes.getEliminarDepartamentos(), "Eliminar Departamento", controller -> controller.setEdificioActual(edificio));
     }
 
     @FXML
@@ -94,33 +89,21 @@ public class MenuDepartamentosController
     {
         try
         {
+            validarNombreEdificio();
             Edificio edificio = obtenerEdificioValidado(nombreEdTextField.getText());
             MostrarDepartamentosController mostrar = mostrarVentana(Constantes.getMostrarDepartamentos(), "Mostrar Departamentos");
             mostrar.mostrarDepartamentos(edificio.getDepartamentos());
         }
         catch (NoEdificioException | FaltaDatosException | IOException e)
         {
-            ManejadorExcepciones.handleException(e, e.getMessage());
+            UtilidadAlertas.alertaError("Error", e.getMessage());
         }
     }
 
     @FXML
     private void editarDepartamento()
     {
-        try
-        {
-            Edificio edificio = obtenerEdificioValidado(nombreEdTextField.getText());
-            EditarAtributosDeptoController editar = mostrarVentana(Constantes.getEditarDepartamento(), "Editar Departamento");
-            editar.setEdificio(edificio);
-        }
-        catch (NoEdificioException | FaltaDatosException e)
-        {
-            ManejadorExcepciones.handleException(e, e.getMessage());
-        }
-        catch (IOException e)
-        {
-            ManejadorExcepciones.handleException(e, "Error al abrir la ventana de edición.");
-        }
+        operacionDepartamento(Constantes.getEditarDepartamento(), "Editar Departamento", controller -> controller.setEdificioActual(edificio));
     }
 
     public void volver()

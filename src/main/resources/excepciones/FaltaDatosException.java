@@ -7,8 +7,8 @@ package src.main.resources.excepciones;
 
 public class FaltaDatosException extends Exception
 {
-    public FaltaDatosException(String message)
+    public FaltaDatosException()
     {
-        super(message);
+        super("Por favor, ingresa todos los datos.");
     }
 }

@@ -7,6 +7,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import src.main.model.Edificio;
 import src.main.model.Sistema;
+import src.main.resources.UtilidadAlertas;
+import src.main.resources.excepciones.FaltaDatosException;
 import src.main.resources.excepciones.NoEdificioException;
 
 public class BuscarEdificioController
@@ -31,6 +33,8 @@ public class BuscarEdificioController
         {
             String nombreEdificio = nombreEdificioField.getText();
 
+            if (nombreEdificio.isEmpty()) throw new FaltaDatosException();
+
             Edificio edificioAuxiliar = Sistema.buscarEdificio(nombreEdificio);
 
             String datosEdificio = edificioAuxiliar.getInformacionCompleta();
@@ -39,11 +43,10 @@ public class BuscarEdificioController
 
             Stage stage = (Stage) buscarButton.getScene().getWindow();
             stage.show();
-
         }
-        catch (NoEdificioException e)
+        catch (NoEdificioException | FaltaDatosException e)
         {
-            ManejadorExcepciones.handleException(new Exception("Error"), e.getMessage());
+            UtilidadAlertas.alertaError("Error", e.getMessage());
         }
 
     }

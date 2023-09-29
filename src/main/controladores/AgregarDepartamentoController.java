@@ -1,7 +1,6 @@
 package src.main.controladores;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -15,7 +14,7 @@ import src.main.resources.excepciones.FaltaDatosException;
 
 import java.io.IOException;
 
-public class AgregarDepartamentoController
+public class AgregarDepartamentoController implements ControladorConEdificio
 {
 
     private Edificio edificioActual;
@@ -52,15 +51,7 @@ public class AgregarDepartamentoController
 
         try
         {
-            if (cantidadDepartamentos.isEmpty() || cantidadHabitaciones.isEmpty() || tipoDeDepartamentoComboBox.getSelectionModel().getSelectedItem() == null)
-            {
-                throw new FaltaDatosException("Por favor ingresa todos los datos.");
-            }
-
-            if (Integer.parseInt(cantidadDepartamentos) < 1 || Integer.parseInt(cantidadHabitaciones) < 1)
-            {
-                throw new ArgumentoIlegalException("Por favor ingresa un número válido.");
-            }
+            if (cantidadDepartamentos.isEmpty() || cantidadHabitaciones.isEmpty() || tipoDeDepartamentoComboBox.getSelectionModel().getSelectedItem() == null) throw new FaltaDatosException();
 
             edificioActual.agregarDepartamento(Integer.parseInt(cantidadDepartamentos), Integer.parseInt(cantidadHabitaciones), nombreTipo);
 
@@ -71,19 +62,18 @@ public class AgregarDepartamentoController
             else UtilidadAlertas.alertaInformacion("Departamentos agregados", "Los departamentos han sido agregados correctamente.");
 
             Sistema.guardarEnCSV(Constantes.getCSV());
-
         }
-        catch (FaltaDatosException | ArgumentoIlegalException e)
+        catch (ArgumentoIlegalException | FaltaDatosException e)
         {
-            ManejadorExcepciones.handleException(new Exception("Error"), e.getMessage());
+            UtilidadAlertas.alertaError("Error", e.getMessage());
         }
         catch (NumberFormatException e)
         {
-            ManejadorExcepciones.handleException(new Exception("Error"), "La cantidad de departamentos y habitaciones debe ser un número entero.");
+            UtilidadAlertas.alertaError("Error", "Los campos de cantidad de departamentos y cantidad de habitaciones deben ser números enteros.");
         }
         catch (IOException e)
         {
-            ManejadorExcepciones.handleException(new Exception("Error"), "No se pudo guardar el departamento.");
+            UtilidadAlertas.alertaError("Error", "Error al guardar en el archivo CSV.");
         }
     }
 

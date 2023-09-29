@@ -6,8 +6,8 @@ package src.main.resources.excepciones;
  */
 public class NoDepartamentoException extends Exception
 {
-    public NoDepartamentoException(String message)
+    public NoDepartamentoException()
     {
-        super(message);
+        super("Este departamento no existe.");
     }
 }

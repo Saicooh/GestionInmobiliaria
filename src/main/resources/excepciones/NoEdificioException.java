@@ -6,8 +6,8 @@ package src.main.resources.excepciones;
 
 public class NoEdificioException extends Exception
 {
-    public NoEdificioException(String message)
+    public NoEdificioException()
     {
-        super(message);
+        super("Este edificio no existe.");
     }
 }

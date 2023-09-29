@@ -25,13 +25,13 @@ public final class Sistema
     public static Edificio buscarEdificio(String nombre) throws NoEdificioException
     {
         Edificio edificio = mapaEdificios.get(nombre);
-        if (edificio == null) throw new NoEdificioException("El edificio '" + nombre + "' no existe.");
+        if (edificio == null) throw new NoEdificioException();
         return edificio;
     }
 
-    public static void eliminarEdificio(String nombre, Edificio edificio)
+    public static void eliminarEdificio(Edificio edificio)
     {
-        mapaEdificios.remove(nombre);
+        mapaEdificios.remove(edificio.getNombre());
         listaEdificios.remove(edificio);
     }
 

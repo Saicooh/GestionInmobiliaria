@@ -1,14 +1,13 @@
 package src.main.model;
 
 import src.main.resources.excepciones.ArgumentoDuplicadoException;
+import src.main.resources.excepciones.ArgumentoIlegalException;
+import src.main.resources.excepciones.FaltaDatosException;
 import src.main.resources.excepciones.NoDepartamentoException;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+
 
 public class Edificio
 {
@@ -32,8 +31,9 @@ public class Edificio
         this.demanda = demanda;
     }
 
-    public void agregarDepartamento(int cantidadIngresar, int cantidadDeHabitaciones, String nombreTipo)
+    public void agregarDepartamento(int cantidadIngresar, int cantidadDeHabitaciones, String nombreTipo) throws ArgumentoIlegalException, FaltaDatosException
     {
+        if (cantidadIngresar < 1 || cantidadDeHabitaciones < 1) throw new ArgumentoIlegalException();
 
         for (int i = 0; i < cantidadIngresar; i++)
         {
@@ -53,7 +53,7 @@ public class Edificio
     public Departamento buscarDepartamento(int numero) throws NoDepartamentoException
     {
         Departamento departamento = mapaDepartamentos.get(numero);
-        if (departamento == null) throw new NoDepartamentoException("El departamento '" + numero + "' no existe.");
+        if (departamento == null) throw new NoDepartamentoException();
         return departamento;
     }
 
@@ -79,16 +79,20 @@ public class Edificio
         System.out.println("Cantidad de departamentos disponibles: " + edificio.getCantidadDepartamentosDisponibles() + "\n");
     }
 
-    public void editarDepartamento(int numero, int nuevoNumero, int cantHabitaciones, String value, String value1) throws NoDepartamentoException, ArgumentoDuplicadoException
+    public void editarDepartamento(int numero, int nuevoNumero, int cantHabitaciones, String nombreTipo, String disponibilidad) throws NoDepartamentoException, ArgumentoDuplicadoException, ArgumentoIlegalException
     {
         Departamento departamento = this.buscarDepartamento(numero);
 
+        if (nuevoNumero < 1 || cantHabitaciones < 1) throw new ArgumentoIlegalException();
         if (mapaDepartamentos.containsKey(nuevoNumero)) throw new ArgumentoDuplicadoException("El número de departamento '" + nuevoNumero + "' ya existe.");
+
+        if (departamento.getDisponible().equals("No disponible") && disponibilidad.equals("Disponible")) this.setCantidadDepartamentosDisponibles(this.getCantidadDepartamentosDisponibles() + 1);
+        if (departamento.getDisponible().equals("Disponible") && disponibilidad.equals("No disponible")) this.setCantidadDepartamentosDisponibles(this.getCantidadDepartamentosDisponibles() - 1);
 
         departamento.setNumero(nuevoNumero);
         departamento.setCantidadHabitaciones(cantHabitaciones);
-        departamento.setNombreTipo(value);
-        departamento.setDisponible(value1.equals("Disponible"));
+        departamento.setNombreTipo(nombreTipo);
+        departamento.setDisponible(disponibilidad.equals("Disponible"));
 
         mapaDepartamentos.remove(numero);
         mapaDepartamentos.put(nuevoNumero, departamento);

@@ -11,11 +11,13 @@ import src.main.model.Edificio;
 import src.main.model.Sistema;
 import src.main.resources.Constantes;
 import src.main.resources.excepciones.ArgumentoDuplicadoException;
+import src.main.resources.excepciones.ArgumentoIlegalException;
+import src.main.resources.excepciones.FaltaDatosException;
 import src.main.resources.excepciones.NoDepartamentoException;
 
 import java.io.IOException;
 
-public class EditarAtributosDeptoController
+public class EditarAtributosDeptoController implements ControladorConEdificio
 {
     @FXML
     private Button btnGuardar;
@@ -37,25 +39,29 @@ public class EditarAtributosDeptoController
     {
         try
         {
+            if (numeroDepartamentoField.getText().isEmpty()) throw new FaltaDatosException();
+
             int numero = Integer.parseInt(numeroDepartamentoField.getText());
 
             Departamento depto = edificioActual.buscarDepartamento(numero);
+
             numeroField.setText(String.valueOf(depto.getNumero()));
             numeroDepartamentoField.setText(String.valueOf(depto.getNumero()));
             cantidadHabitacionesField.setText(String.valueOf(depto.getCantidadHabitaciones()));
+
             disponibleChoiceBox.setValue(depto.getDisponible());
             tipoChoiceBox.setValue(depto.getNombreTipo());
             feedbackLabel.setText("");
 
             formularioEdicion.setVisible(true);
         }
+        catch (NoDepartamentoException | FaltaDatosException e)
+        {
+            feedbackLabel.setText(e.getMessage());
+        }
         catch (NumberFormatException e)
         {
             feedbackLabel.setText("El número de departamento debe ser un número entero.");
-        }
-        catch (NoDepartamentoException e)
-        {
-            feedbackLabel.setText(e.getMessage());
         }
     }
 
@@ -63,6 +69,7 @@ public class EditarAtributosDeptoController
     {
         try
         {
+
             int numero = Integer.parseInt(numeroDepartamentoField.getText());
 
             int nuevoNumero = Integer.parseInt(numeroField.getText());
@@ -80,13 +87,14 @@ public class EditarAtributosDeptoController
         {
             feedbackLabel.setText("Por favor, ingrese solo números en los campos de número y cantidad de habitaciones.");
         }
-        catch (NoDepartamentoException | ArgumentoDuplicadoException e)
+        catch (NoDepartamentoException | ArgumentoDuplicadoException | ArgumentoIlegalException e)
         {
             feedbackLabel.setText(e.getMessage());
         }
     }
 
-    public void setEdificio(Edificio edificio)
+    @Override
+    public void setEdificioActual(Edificio edificio)
     {
         this.edificioActual = edificio;
     }

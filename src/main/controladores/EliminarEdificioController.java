@@ -30,7 +30,7 @@ public class EliminarEdificioController
 
         try
         {
-            if (nombreEdificio.isEmpty()) throw new FaltaDatosException("Por favor ingresa el nombre del edificio.");
+            if (nombreEdificio.isEmpty()) throw new FaltaDatosException();
         }
         catch (FaltaDatosException e)
         {
@@ -58,8 +58,8 @@ public class EliminarEdificioController
 
         if (alert.showAndWait().get() == btnSi)
         {
-            Sistema.eliminarEdificio(nombreEdificio, edificio);
-            UtilidadAlertas.alertaInformacion("Edificio eliminado", "El edificio ha sido eliminado exitosamente.");
+            Sistema.eliminarEdificio(edificio);
+            UtilidadAlertas.alertaInformacion("Edificio eliminado", "El edificio ha sido eliminado correctamente.");
         }
 
         Sistema.guardarEnCSV(Constantes.getCSV());
