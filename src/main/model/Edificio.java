@@ -37,7 +37,7 @@ public class Edificio
 
         for (int i = 0; i < cantidadIngresar; i++)
         {
-            int numero = this.getCantidadDepartamentos() + 1;
+            int numero = 1;
 
             while(mapaDepartamentos.containsKey(numero)) numero++;
 
@@ -83,13 +83,15 @@ public class Edificio
     {
         Departamento departamento = this.buscarDepartamento(numero);
 
-        for (Departamento depto : departamentos)
-            if (depto.getNumero() == nuevoNumero) throw new ArgumentoDuplicadoException("El departamento '" + nuevoNumero + "' ya existe.");
+        if (mapaDepartamentos.containsKey(nuevoNumero)) throw new ArgumentoDuplicadoException("El número de departamento '" + nuevoNumero + "' ya existe.");
 
         departamento.setNumero(nuevoNumero);
         departamento.setCantidadHabitaciones(cantHabitaciones);
         departamento.setNombreTipo(value);
         departamento.setDisponible(value1.equals("Disponible"));
+
+        mapaDepartamentos.remove(numero);
+        mapaDepartamentos.put(nuevoNumero, departamento);
     }
 
     public String getNombre() { return this.nombre; }

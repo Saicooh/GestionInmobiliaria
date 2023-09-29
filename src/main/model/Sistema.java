@@ -1,5 +1,6 @@
 package src.main.model;
 
+import src.main.resources.excepciones.ArgumentoDuplicadoException;
 import src.main.resources.excepciones.NoEdificioException;
 
 import java.io.*;
@@ -12,8 +13,10 @@ public final class Sistema
     private static final HashMap<String, Edificio> mapaEdificios = new HashMap<>(100, 0.75f);
     private static final ArrayList<Edificio> listaEdificios = new ArrayList<>();
 
-    public static void agregarEdificio(String nombre, String direccion, int demanda)
+    public static void agregarEdificio(String nombre, String direccion, int demanda) throws ArgumentoDuplicadoException
     {
+        if (mapaEdificios.containsKey(nombre)) throw new ArgumentoDuplicadoException("El edificio '" + nombre + "' ya existe.");
+
         Edificio nuevoEdificio = new Edificio(nombre, direccion, demanda);
         mapaEdificios.put(nombre, nuevoEdificio);
         listaEdificios.add(nuevoEdificio);

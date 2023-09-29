@@ -23,8 +23,8 @@ public class MostrarEdificiosController
         }
         else for (Edificio edificio : listaEdificios)
         {
-                Label edificioLabel = new Label(edificio.getInformacionCompleta());
-                edificiosContainer.getChildren().add(edificioLabel);
+            Label edificioLabel = new Label(edificio.getInformacionCompleta());
+            edificiosContainer.getChildren().add(edificioLabel);
         }
     }
 

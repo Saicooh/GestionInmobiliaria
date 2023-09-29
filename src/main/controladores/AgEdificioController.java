@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import src.main.model.Sistema;
 import src.main.resources.Constantes;
 import src.main.resources.UtilidadAlertas;
+import src.main.resources.excepciones.ArgumentoDuplicadoException;
 
 import java.io.IOException;
 
@@ -50,7 +51,6 @@ public class AgEdificioController
             UtilidadAlertas.alertaInformacion("Edificio agregado", "El edificio ha sido agregado correctamente.");
 
             Sistema.guardarEnCSV(Constantes.getCSV());
-
         }
         catch (NumberFormatException e)
         {
@@ -59,6 +59,10 @@ public class AgEdificioController
         catch (IOException e)
         {
             ManejadorExcepciones.handleException(new Exception("Error"), "No se pudo guardar el edificio.");
+        }
+        catch (ArgumentoDuplicadoException e)
+        {
+            ManejadorExcepciones.handleException(new Exception("Error"), e.getMessage());
         }
     }
 }
