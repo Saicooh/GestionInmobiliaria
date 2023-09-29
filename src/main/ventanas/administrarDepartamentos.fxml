@@ -27,5 +27,6 @@
     <Button text="Buscar Departamento" onAction="#buscarDepartamento" />
     <Button text="Eliminar Departamento" onAction="#eliminarDepartamento" />
     <Button text="Mostrar Departamentos" onAction="#mostrarDepartamentos" />
+    <Button text="Editar Departamento" onAction="#editarDepartamento" />
     <Button text="Volver al Menú Principal" onAction="#volver" />
 </VBox>

@@ -66,6 +66,7 @@ public final class Sistema
 
                     Departamento departamento = new Departamento(numero, cantidadHabitaciones, tipo);
                     edificio.getDepartamentos().add(departamento);
+                    edificio.getMapaDepartamentos().put(numero, departamento);
                 }
 
                 edificio.setCantidadDepartamentos(cantidadDepartamentos);
@@ -82,7 +83,7 @@ public final class Sistema
     {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaCSV)))
         {
-            writer.write("nombreEdificio,direccion,demanda,cantidad_departamentos,numero,cantidadDeHab,tipo\n");
+            writer.write("nombreEdificio,direccion,demanda,cantidad_departamentos,[DEPARTAMENTOS]numero,cantidadDeHab,tipo\n");
 
             for (Edificio edificio : listaEdificios)
             {

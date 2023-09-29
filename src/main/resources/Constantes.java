@@ -17,6 +17,8 @@ public final class Constantes
 
     private static final String CSV = "DatosIniciales.csv";
 
+    private static final String REPORTE = "Reporte.csv";
+
     private static final String ADMINISTRAR_DEPARTAMENTOS = "/src/main/ventanas/administrarDepartamentos.fxml";
 
     private static final String AGREGAR_DEPARTAMENTOS = "/src/main/ventanas/agregarDepartamento.fxml";
@@ -26,6 +28,8 @@ public final class Constantes
     private static final String MOSTRAR_DEPARTAMENTOS = "/src/main/ventanas/mostrarDepartamentos.fxml";
 
     private static final String ELIMINAR_DEPARTAMENTOS = "/src/main/ventanas/eliminarDepartamento.fxml";
+
+    private static final String EDITAR_DEPARTAMENTO = "/src/main/ventanas/editarDepartamento.fxml";
 
     private static final String ERROR_INGRESAR = "Error, no se pudo ingresar al sistema";
 
@@ -45,6 +49,8 @@ public final class Constantes
 
     public static String getCSV() { return CSV; }
 
+    public static String getReporte() { return REPORTE; }
+
     public static String getAdministrarDepartamentos() { return ADMINISTRAR_DEPARTAMENTOS; }
 
     public static String getAgregarDepartamentos() { return AGREGAR_DEPARTAMENTOS; }
@@ -54,6 +60,8 @@ public final class Constantes
     public static String getMostrarDepartamentos() { return MOSTRAR_DEPARTAMENTOS; }
 
     public static String getEliminarDepartamentos() { return ELIMINAR_DEPARTAMENTOS; }
+
+    public static String getEditarDepartamento() { return EDITAR_DEPARTAMENTO; }
 
     public static String getErrorIngresar() { return ERROR_INGRESAR; }
 

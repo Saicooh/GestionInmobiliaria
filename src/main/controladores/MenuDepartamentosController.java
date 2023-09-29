@@ -104,6 +104,25 @@ public class MenuDepartamentosController
         }
     }
 
+    @FXML
+    private void editarDepartamento()
+    {
+        try
+        {
+            Edificio edificio = obtenerEdificioValidado(nombreEdTextField.getText());
+            EditarAtributosDeptoController editar = mostrarVentana(Constantes.getEditarDepartamento(), "Editar Departamento");
+            editar.setEdificio(edificio);
+        }
+        catch (NoEdificioException | FaltaDatosException e)
+        {
+            ManejadorExcepciones.handleException(e, e.getMessage());
+        }
+        catch (IOException e)
+        {
+            ManejadorExcepciones.handleException(e, "Error al abrir la ventana de edición.");
+        }
+    }
+
     public void volver()
     {
         try

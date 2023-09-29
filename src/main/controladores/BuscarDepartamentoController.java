@@ -37,8 +37,6 @@ public class BuscarDepartamentoController
 
             Departamento departamentoAuxiliar = edificioActual.buscarDepartamento(numero);
 
-            if (departamentoAuxiliar == null) throw new NoDepartamentoException("El departamento '" + numero + "' no existe.");
-
             String datosDepartamento = departamentoAuxiliar.getInformacionCompleta();
             datosDepartamentoLabel2.setText("Resultados:");
             datosDepartamentoLabel.setText(datosDepartamento);

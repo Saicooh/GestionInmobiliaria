@@ -12,7 +12,8 @@ import src.main.resources.excepciones.NoDepartamentoException;
 
 import java.io.IOException;
 
-public class EliminarDepartamentoController {
+public class EliminarDepartamentoController
+{
 
     @FXML
     private Button eliminarDepartamentoButton;
@@ -32,10 +33,9 @@ public class EliminarDepartamentoController {
         {
             int numero = Integer.parseInt(numeroDepartamentoTextField.getText());
 
-            boolean eliminado = edificio.eliminarDepartamento(numero);
+            edificio.eliminarDepartamento(numero);
 
-            if (eliminado) UtilidadAlertas.alertaInformacion("Departamento eliminado", "El departamento ha sido eliminado exitosamente.");
-            else throw new NoDepartamentoException("El departamento '" + numero + "' no existe.");
+            UtilidadAlertas.alertaInformacion("Departamento eliminado", "El departamento ha sido eliminado exitosamente.");
 
             Stage stage = (Stage) numeroDepartamentoTextField.getScene().getWindow();
             stage.close();

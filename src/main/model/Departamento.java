@@ -6,7 +6,7 @@ public class Departamento
     private int cantidadHabitaciones;
     private String disponible;
     private String nombreTipo;
-    private int precio;
+    private final int precio;
 
     public Departamento(int numero, int cantidadHabitaciones, String nombre)
     {
@@ -34,8 +34,6 @@ public class Departamento
 
     public String getNombreTipo() { return this.nombreTipo; }
 
-    public int getPrecio() { return this.precio; }
-
     public String getInformacionCompleta() { return "Numero: " + numero + "\nCantidad de habitaciones: " + cantidadHabitaciones + "\nTipo: " + nombreTipo + "\nPrecio: " + precio + "\nDisponibilidad: " + disponible; }
 
     public void setNumero(int numero) { this.numero = numero; }
@@ -47,8 +45,6 @@ public class Departamento
         if (disponible) this.disponible = "Disponible";
         else this.disponible = "No Disponible";
     }
-
-    public void setPrecio(int precio) { this.precio = precio; }
 
     public void setNombreTipo(String nombreTipo) { this.nombreTipo = nombreTipo;}
 }

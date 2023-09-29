@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import src.main.model.Sistema;
 import src.main.resources.Constantes;
 
 import java.io.IOException;
@@ -37,9 +38,10 @@ public class MenuController
     }
 
     @FXML
-    private void salir()
+    private void salir() throws IOException
     {
         primaryStage.close();
+        Sistema.guardarEnCSV(Constantes.getReporte());
         System.exit(0);
     }
 

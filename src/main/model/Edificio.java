@@ -1,9 +1,14 @@
 package src.main.model;
 
+import src.main.resources.excepciones.ArgumentoDuplicadoException;
+import src.main.resources.excepciones.NoDepartamentoException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Edificio
 {
@@ -12,6 +17,8 @@ public class Edificio
     private int cantidadDepartamentos;
     private int cantidadDepartamentosDisponibles;
     private final ArrayList<Departamento> departamentos;
+
+    private final HashMap<Integer, Departamento> mapaDepartamentos;
     private int demanda;
 
     public Edificio(String nombre, String direccion, int demanda)
@@ -21,98 +28,45 @@ public class Edificio
         this.cantidadDepartamentos = 0;
         this.cantidadDepartamentosDisponibles = 0;
         this.departamentos = new ArrayList<>();
+        this.mapaDepartamentos = new HashMap<>(20, 0.75f);
         this.demanda = demanda;
     }
 
     public void agregarDepartamento(int cantidadIngresar, int cantidadDeHabitaciones, String nombreTipo)
     {
+
         for (int i = 0; i < cantidadIngresar; i++)
         {
             int numero = this.getCantidadDepartamentos() + 1;
+
+            while(mapaDepartamentos.containsKey(numero)) numero++;
+
             Departamento departamento = new Departamento(numero, cantidadDeHabitaciones, nombreTipo);
 
-            this.getDepartamentos().add(departamento);
+            departamentos.add(departamento);
+            mapaDepartamentos.put(numero, departamento);
             this.setCantidadDepartamentos(this.getCantidadDepartamentos() + 1);
             this.setCantidadDepartamentosDisponibles(this.getCantidadDepartamentosDisponibles() + 1);
         }
     }
 
-    public Departamento buscarDepartamento(int numero)
+    public Departamento buscarDepartamento(int numero) throws NoDepartamentoException
     {
-        for (Departamento depto : departamentos)
-        {
-            if (depto.getNumero() == numero) return depto;
-        }
-        return null;
+        Departamento departamento = mapaDepartamentos.get(numero);
+        if (departamento == null) throw new NoDepartamentoException("El departamento '" + numero + "' no existe.");
+        return departamento;
     }
 
-    public boolean eliminarDepartamento(int numero)
+    public void eliminarDepartamento(int numero) throws NoDepartamentoException
     {
-        for (Departamento depto : departamentos)
-        {
-            if (depto.getNumero() == numero) {
-                departamentos.remove(depto);
-                return true;
-            }
-        }
-        return false;
+        Departamento departamento = buscarDepartamento(numero);
+
+        departamentos.remove(departamento);
+        mapaDepartamentos.remove(numero);
+        this.setCantidadDepartamentos(this.getCantidadDepartamentos() - 1);
+        this.setCantidadDepartamentosDisponibles(this.getCantidadDepartamentosDisponibles() - 1);
     }
-
-    public void mostrarDepartamentos(Edificio edificio, int numero)
-    {
-        if (edificio.getCantidadDepartamentos() < numero)
-        {
-            System.out.println("El departamento buscado no existe");
-            return;
-        }
-
-        BufferedReader Lector = new BufferedReader(new InputStreamReader(System.in));
-
-        int indiceDepartamento = numero - 1;
-
-        Departamento departamento = edificio.getDepartamentos().get(indiceDepartamento);
-
-        departamento.getInformacionCompleta();
-    }
-
-    public void mostrarDepartamentos(Edificio edificio)
-    {
-        if (edificio.getCantidadDepartamentos() == 0) System.out.println("No hay departamentos ingresados");
-        else for (Departamento departamento : edificio.getDepartamentos()) System.out.println(departamento.getInformacionCompleta() + "\n");
-
-        System.out.println("Cantidad de departamentos: " + edificio.getCantidadDepartamentos() + "\n");
-    }
-
-    public void disponibilidadDepartamento(Edificio edificio) throws IOException
-    {
-        BufferedReader Lector = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println("Ingrese el numero del departamento: ");
-        int numero = Integer.parseInt(Lector.readLine());
-
-        System.out.println("El departamento está " + edificio.getDepartamentos().get(numero - 1).getDisponible());
-        System.out.println("Desea cambiar el estado del departamento? (s/n)");
-        String respuesta = Lector.readLine();
-
-        int indiceDepartamento = numero - 1;
-
-        Departamento departamento = edificio.getDepartamentos().get(indiceDepartamento);
-
-        if (respuesta.equalsIgnoreCase("s") || respuesta.equalsIgnoreCase("si"))
-        {
-            if (departamento.getDisponible().equals("Disponible"))
-            {
-                departamento.setDisponible(false);
-                edificio.setCantidadDepartamentosDisponibles(edificio.getCantidadDepartamentosDisponibles() - 1);
-            }
-            else
-            {
-                departamento.setDisponible(true);
-                edificio.setCantidadDepartamentosDisponibles(edificio.getCantidadDepartamentosDisponibles() + 1);
-            }
-        }
-    }
-
+    
     public void mostrarDepartamentosDisponibles(Edificio edificio)
     {
         if (edificio.getCantidadDepartamentosDisponibles() == 0) System.out.println("No hay departamentos disponibles");
@@ -123,6 +77,19 @@ public class Edificio
         }
 
         System.out.println("Cantidad de departamentos disponibles: " + edificio.getCantidadDepartamentosDisponibles() + "\n");
+    }
+
+    public void editarDepartamento(int numero, int nuevoNumero, int cantHabitaciones, String value, String value1) throws NoDepartamentoException, ArgumentoDuplicadoException
+    {
+        Departamento departamento = this.buscarDepartamento(numero);
+
+        for (Departamento depto : departamentos)
+            if (depto.getNumero() == nuevoNumero) throw new ArgumentoDuplicadoException("El departamento '" + nuevoNumero + "' ya existe.");
+
+        departamento.setNumero(nuevoNumero);
+        departamento.setCantidadHabitaciones(cantHabitaciones);
+        departamento.setNombreTipo(value);
+        departamento.setDisponible(value1.equals("Disponible"));
     }
 
     public String getNombre() { return this.nombre; }
@@ -142,6 +109,8 @@ public class Edificio
 
     public ArrayList<Departamento> getDepartamentos() { return this.departamentos; }
 
+    public HashMap<Integer, Departamento> getMapaDepartamentos() { return this.mapaDepartamentos; }
+
     public void setNombre(String nombre) { this.nombre = nombre; }
 
     public void setDireccion(String direccion) { this.direccion = direccion; }
@@ -151,6 +120,7 @@ public class Edificio
     public void setDemanda(int demanda) { this.demanda = demanda; }
 
     public void setCantidadDepartamentosDisponibles(int cantidadDepartamentosDisponibles) { this.cantidadDepartamentosDisponibles = cantidadDepartamentosDisponibles; }
+
 
 
 }

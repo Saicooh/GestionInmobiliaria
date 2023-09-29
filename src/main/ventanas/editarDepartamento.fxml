@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<VBox alignment="CENTER" spacing="20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.main.controladores.EditarAtributosDeptoController">
+    <!-- Para buscar el departamento por número -->
+    <HBox spacing="10" alignment="BASELINE_CENTER">
+        <Label text="Número  " />
+        <TextField fx:id="numeroDepartamentoField" promptText="Número del departamento" />
+        <Button text="Buscar" onAction="#buscarYMostrarDepartamento" />
+    </HBox>
+
+    <!-- Formulario para editar atributos (inicialmente invisible) -->
+    <VBox fx:id="formularioEdicion" visible="false" spacing="10">
+        <HBox spacing = "10" alignment="BASELINE_CENTER">
+            <Label text = "Número de Departamento"/>
+            <TextField fx:id="numeroField" promptText="Número" />
+        </HBox>
+
+        <HBox spacing = "10" alignment="BASELINE_CENTER">
+            <Label text = "Cantidad de Habitaciones" />
+            <TextField fx:id="cantidadHabitacionesField" promptText="Cantidad de Habitaciones" />
+        </HBox>
+
+        <HBox spacing = "10" alignment="BASELINE_CENTER">
+            <Label text = "Disponibilidad" />
+            <ChoiceBox fx:id="disponibleChoiceBox">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Disponible"/>
+                        <String fx:value="No Disponible"/>
+                    </FXCollections>
+                </items>
+            </ChoiceBox>
+        </HBox>
+
+        <HBox spacing = "10" alignment="BASELINE_CENTER">
+            <Label text = "Tipo de departamento"/>
+            <ChoiceBox fx:id="tipoChoiceBox">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="A"/>
+                        <String fx:value="B"/>
+                        <String fx:value="C"/>
+                        <String fx:value="D"/>
+                        <String fx:value="E"/>
+                    </FXCollections>
+                </items>
+            </ChoiceBox>
+        </HBox>
+
+        <HBox spacing = "10" alignment="BASELINE_CENTER">
+            <Button fx:id="btnGuardar" text="Guardar" onAction="#guardarCambios" />
+        </HBox>
+    </VBox>
+
+    <!-- Mensajes de feedback para el usuario -->
+    <Label fx:id="feedbackLabel" text="Hola" />
+</VBox>
