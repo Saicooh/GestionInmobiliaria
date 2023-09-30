@@ -8,7 +8,7 @@
 
 <VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="src.main.controladores.MenuController">
     <ImageView fx:id="logoImageView" fitWidth="334" fitHeight="334">
-        <Image url="/src/main/resources/img/gestionpro.png"/> <!-- Ajusta la ruta según donde tengas guardada tu imagen -->
+        <Image url="/src/main/resources/img/gestion2.png"/> <!-- Ajusta la ruta según donde tengas guardada tu imagen -->
     </ImageView>
 
     <Label text="¡Bienvenido al Programa de Gestión Inmobiliaria!">
