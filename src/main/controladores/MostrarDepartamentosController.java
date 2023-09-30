@@ -78,6 +78,7 @@ public class MostrarDepartamentosController
 
         actualizarTabla(listaFiltrada);
     }
+
     private void filtrarPorDisponibilidad(ArrayList<Departamento> lista)
     {
         String estadoSeleccionado = disponibilidadChoiceBox.getValue();
