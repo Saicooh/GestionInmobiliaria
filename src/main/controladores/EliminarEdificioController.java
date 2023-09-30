@@ -34,7 +34,7 @@ public class EliminarEdificioController
         }
         catch (FaltaDatosException e)
         {
-            ManejadorExcepciones.handleException(new Exception("Error"), e.getMessage());
+            UtilidadAlertas.alertaError("Error", e.getMessage());
             return;
         }
 
@@ -43,7 +43,7 @@ public class EliminarEdificioController
         try { edificio = Sistema.buscarEdificio(nombreEdificio); }
         catch (NoEdificioException e)
         {
-            ManejadorExcepciones.handleException(new Exception("Error"), e.getMessage());
+            UtilidadAlertas.alertaError("Error", e.getMessage());
             return;
         }
 

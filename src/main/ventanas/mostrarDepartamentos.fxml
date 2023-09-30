@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
       fx:controller="src.main.controladores.MostrarDepartamentosController"
       alignment="CENTER" spacing="10">
+
     <Label text="Lista de Departamentos" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
-    <ScrollPane prefWidth="400" prefHeight="300">
-        <VBox fx:id="departamentosContainer" spacing="5" />
-    </ScrollPane>
+
+    <HBox spacing="10">
+        <Label text="Filtrar por disponibilidad:" />
+        <ChoiceBox fx:id="disponibilidadChoiceBox" />
+        <Button text="Filtrar" onAction="#filtrar" />
+    </HBox>
+
+    <TableView fx:id="tablaDepartamentos" prefWidth="600" prefHeight="300">
+        <columns>
+            <TableColumn fx:id="columnaNumero" text="Número" />
+            <TableColumn fx:id="columnaHabitaciones" text="Habitaciones" />
+            <TableColumn fx:id="columnaTipo" text="Tipo" />
+            <TableColumn fx:id="columnaPrecio" text="Precio" />
+            <TableColumn fx:id="columnaDisponible" text="Disponibilidad" />
+            <!-- Puedes agregar más columnas si es necesario -->
+        </columns>
+    </TableView>
+
     <Button text="Cerrar" onAction="#cerrarVentana" />
+
 </VBox>

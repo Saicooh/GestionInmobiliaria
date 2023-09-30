@@ -15,7 +15,7 @@ public final class Constantes
 
     private static final String MOSTRAR_EDIFICIOS = "/src/main/ventanas/mostrarEdificios.fxml";
 
-    private static final String CSV = "DatosIniciales.csv";
+    private static final String CSV = "Persistencia.csv";
 
     private static final String REPORTE = "Reporte.csv";
 

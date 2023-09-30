@@ -45,11 +45,11 @@
             <ChoiceBox fx:id="tipoChoiceBox">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="A"/>
-                        <String fx:value="B"/>
-                        <String fx:value="C"/>
-                        <String fx:value="D"/>
-                        <String fx:value="E"/>
+                        <String fx:value="Suite Penthouse"/>
+                        <String fx:value="Suite Ejecutiva"/>
+                        <String fx:value="Suite Familiar"/>
+                        <String fx:value="Estudio"/>
+                        <String fx:value="Estudio Económico"/>
                     </FXCollections>
                 </items>
             </ChoiceBox>

@@ -54,15 +54,15 @@ public class AgEdificioController
         }
         catch (NumberFormatException e)
         {
-            ManejadorExcepciones.handleException(new Exception("Error"), "La demanda debe ser un número entero.");
+            UtilidadAlertas.alertaError("Error", "La demanda debe ser un número entero.");
         }
         catch (IOException e)
         {
-            ManejadorExcepciones.handleException(new Exception("Error"), "No se pudo guardar el edificio.");
+            UtilidadAlertas.alertaError("Error", "No se pudo guardar el archivo CSV.");
         }
         catch (ArgumentoDuplicadoException e)
         {
-            ManejadorExcepciones.handleException(new Exception("Error"), e.getMessage());
+               UtilidadAlertas.alertaError("Error", e.getMessage());
         }
     }
 }

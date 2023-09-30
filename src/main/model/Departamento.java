@@ -6,9 +6,9 @@ public class Departamento
     private int cantidadHabitaciones;
     private String disponible;
     private String nombreTipo;
-    private final int precio;
+    private int precio;
 
-    public Departamento(int numero, int cantidadHabitaciones, String nombre)
+    public Departamento(int numero, int cantidadHabitaciones, String nombre, double demanda)
     {
         this.numero = numero;
         this.cantidadHabitaciones = cantidadHabitaciones;
@@ -17,12 +17,11 @@ public class Departamento
 
         switch (nombre)
         {
-            case "A" -> this.precio = 100000;
-            case "B" -> this.precio = 80000;
-            case "C" -> this.precio = 60000;
-            case "D" -> this.precio = 40000;
-            case "E" -> this.precio = 20000;
-            default -> this.precio = 0;
+            case "Suite Penthouse" -> this.precio = (int) (250000000 * demanda);
+            case "Suite Ejecutiva" -> this.precio = (int) (180000000 * demanda);
+            case "Suite Familiar" -> this.precio = (int) (120000000 * demanda);
+            case "Estudio" -> this.precio = (int) (70000000 * demanda);
+            case "Estudio Económico" -> this.precio = (int) (40000000 * demanda);
         }
     }
 
@@ -35,6 +34,8 @@ public class Departamento
     public String getNombreTipo() { return this.nombreTipo; }
 
     public String getInformacionCompleta() { return "Numero: " + numero + "\nCantidad de habitaciones: " + cantidadHabitaciones + "\nTipo: " + nombreTipo + "\nPrecio: " + precio + "\nDisponibilidad: " + disponible; }
+
+    public int getPrecio() { return precio; }
 
     public void setNumero(int numero) { this.numero = numero; }
 

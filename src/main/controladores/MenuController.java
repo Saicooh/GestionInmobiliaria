@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import src.main.model.Sistema;
 import src.main.resources.Constantes;
+import src.main.resources.UtilidadAlertas;
 
 import java.io.IOException;
 
@@ -34,7 +35,7 @@ public class MenuController
             currentScene.setRoot(root);
 
         }
-        catch (IOException e) { ManejadorExcepciones.handleException(new Exception("Error"), Constantes.getErrorIngresar()); }
+        catch (IOException e) { UtilidadAlertas.alertaError("Error", Constantes.getErrorIngresar()); }
     }
 
     @FXML

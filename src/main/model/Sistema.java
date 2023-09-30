@@ -15,7 +15,7 @@ public final class Sistema
 
     public static void agregarEdificio(String nombre, String direccion, int demanda) throws ArgumentoDuplicadoException
     {
-        if (mapaEdificios.containsKey(nombre)) throw new ArgumentoDuplicadoException("El edificio '" + nombre + "' ya existe.");
+        if (mapaEdificios.containsKey(nombre)) throw new ArgumentoDuplicadoException();
 
         Edificio nuevoEdificio = new Edificio(nombre, direccion, demanda);
         mapaEdificios.put(nombre, nuevoEdificio);
@@ -48,7 +48,7 @@ public final class Sistema
 
                 String nombre = partes[0];
                 String direccion = partes[1];
-                int demanda = Integer.parseInt(partes[2]);
+                double demanda = Double.parseDouble(partes[2]);
                 int cantidadDepartamentos = Integer.parseInt(partes[3]);
 
                 Edificio edificio = new Edificio(nombre, direccion, demanda);
@@ -67,7 +67,7 @@ public final class Sistema
                     String tipo = partes[i];
                     i++;
 
-                    Departamento departamento = new Departamento(numero, cantidadHabitaciones, tipo);
+                    Departamento departamento = new Departamento(numero, cantidadHabitaciones, tipo, demanda);
                     edificio.getDepartamentos().add(departamento);
                     edificio.getMapaDepartamentos().put(numero, departamento);
                 }

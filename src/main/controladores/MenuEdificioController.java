@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import src.main.model.Sistema;
 import src.main.resources.Constantes;
+import src.main.resources.UtilidadAlertas;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -37,21 +38,21 @@ public class MenuEdificioController
     private void agregarEdificio()
     {
         try { mostrarVentana(Constantes.getAgregarEdificio(), "Agregar Edificio"); }
-        catch (Exception e) { ManejadorExcepciones.handleException(new Exception("Error"), Constantes.getErrorOpcion());}
+        catch (Exception e) { UtilidadAlertas.alertaError("Error", e.getMessage()); }
     }
 
     @FXML
     private void buscarEdificio()
     {
         try { mostrarVentana(Constantes.getBuscarEdificio(), "Buscar Edificio"); }
-        catch (Exception e) { ManejadorExcepciones.handleException(new Exception("Error"), Constantes.getErrorOpcion());}
+        catch (Exception e) { UtilidadAlertas.alertaError("Error", e.getMessage());}
     }
 
     @FXML
     private void eliminarEdificio()
     {
         try { mostrarVentana(Constantes.getEliminarEdificio(), "Eliminar Edificio"); }
-        catch (Exception e) { ManejadorExcepciones.handleException(new Exception("Error"), Constantes.getErrorOpcion());}
+        catch (Exception e) { UtilidadAlertas.alertaError("Error", e.getMessage());}
     }
 
     @FXML
@@ -73,7 +74,7 @@ public class MenuEdificioController
 
             stage.show();
         }
-        catch (Exception e) { ManejadorExcepciones.handleException(new Exception("Error"), Constantes.getErrorOpcion());}
+        catch (Exception e) { UtilidadAlertas.alertaError("Error", e.getMessage());}
     }
 
     @FXML
@@ -107,6 +108,6 @@ public class MenuEdificioController
 
             stage.setScene(scene);
         }
-        catch (Exception e) { ManejadorExcepciones.handleException(new Exception("Error"), Constantes.getErrorIngresar()); }
+        catch (Exception e) { UtilidadAlertas.alertaError("Error", e.getMessage()); }
     }
 }

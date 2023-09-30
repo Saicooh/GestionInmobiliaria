@@ -121,7 +121,7 @@ public class MenuDepartamentosController
         }
         catch (IOException e)
         {
-            ManejadorExcepciones.handleException(e, "Error al volver a la vista anterior.");
+            UtilidadAlertas.alertaError("Error", "No se pudo volver al menú principal.");
         }
     }
 

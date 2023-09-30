@@ -18,9 +18,9 @@ public class Edificio
     private final ArrayList<Departamento> departamentos;
 
     private final HashMap<Integer, Departamento> mapaDepartamentos;
-    private int demanda;
+    private double demanda;
 
-    public Edificio(String nombre, String direccion, int demanda)
+    public Edificio(String nombre, String direccion, double demanda)
     {
         this.nombre = nombre;
         this.direccion = direccion;
@@ -41,7 +41,7 @@ public class Edificio
 
             while(mapaDepartamentos.containsKey(numero)) numero++;
 
-            Departamento departamento = new Departamento(numero, cantidadDeHabitaciones, nombreTipo);
+            Departamento departamento = new Departamento(numero, cantidadDeHabitaciones, nombreTipo, demanda);
 
             departamentos.add(departamento);
             mapaDepartamentos.put(numero, departamento);
@@ -57,6 +57,8 @@ public class Edificio
         return departamento;
     }
 
+
+
     public void eliminarDepartamento(int numero) throws NoDepartamentoException
     {
         Departamento departamento = buscarDepartamento(numero);
@@ -66,25 +68,13 @@ public class Edificio
         this.setCantidadDepartamentos(this.getCantidadDepartamentos() - 1);
         this.setCantidadDepartamentosDisponibles(this.getCantidadDepartamentosDisponibles() - 1);
     }
-    
-    public void mostrarDepartamentosDisponibles(Edificio edificio)
-    {
-        if (edificio.getCantidadDepartamentosDisponibles() == 0) System.out.println("No hay departamentos disponibles");
-
-        else for (Departamento departamento : edificio.getDepartamentos())
-        {
-            if (departamento.getDisponible().equals("Disponible")) System.out.println(departamento.getInformacionCompleta() + "\n");
-        }
-
-        System.out.println("Cantidad de departamentos disponibles: " + edificio.getCantidadDepartamentosDisponibles() + "\n");
-    }
 
     public void editarDepartamento(int numero, int nuevoNumero, int cantHabitaciones, String nombreTipo, String disponibilidad) throws NoDepartamentoException, ArgumentoDuplicadoException, ArgumentoIlegalException
     {
         Departamento departamento = this.buscarDepartamento(numero);
 
         if (nuevoNumero < 1 || cantHabitaciones < 1) throw new ArgumentoIlegalException();
-        if (mapaDepartamentos.containsKey(nuevoNumero)) throw new ArgumentoDuplicadoException("El número de departamento '" + nuevoNumero + "' ya existe.");
+        if (mapaDepartamentos.containsKey(nuevoNumero)) throw new ArgumentoDuplicadoException();
 
         if (departamento.getDisponible().equals("No disponible") && disponibilidad.equals("Disponible")) this.setCantidadDepartamentosDisponibles(this.getCantidadDepartamentosDisponibles() + 1);
         if (departamento.getDisponible().equals("Disponible") && disponibilidad.equals("No disponible")) this.setCantidadDepartamentosDisponibles(this.getCantidadDepartamentosDisponibles() - 1);
@@ -106,7 +96,12 @@ public class Edificio
 
     public int getCantidadDepartamentosDisponibles() { return this.cantidadDepartamentosDisponibles; }
 
-    public int getDemanda() { return this.demanda; }
+    public double getDemanda() { return this.demanda; }
+
+    public int getCantidadDepartamentosNoDisponibles()
+    {
+        return this.getCantidadDepartamentos() - this.getCantidadDepartamentosDisponibles();
+    }
 
     public String getInformacionCompleta()
     {

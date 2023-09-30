@@ -33,7 +33,7 @@ public class AgregarDepartamentoController implements ControladorConEdificio
 
     @FXML
     public void initialize() {
-        tipoDeDepartamentoComboBox.getItems().addAll("A", "B", "C", "D", "E");
+        tipoDeDepartamentoComboBox.getItems().addAll("Suite Penthouse", "Suite Ejecutiva", "Suite Familiar", "Estudio", "Estudio Económico");
     }
 
     public void setEdificioActual(Edificio edificio)

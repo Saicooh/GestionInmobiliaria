@@ -43,12 +43,12 @@ public class EliminarDepartamentoController implements ControladorConEdificio
         }
         catch (NumberFormatException e)
         {
-            ManejadorExcepciones.handleException(new Exception("Error"), "Por favor ingresa un número válido.");
+            UtilidadAlertas.alertaError("Error", "El número de departamento debe ser un número entero.");
             return;
         }
         catch (NoDepartamentoException e)
         {
-            ManejadorExcepciones.handleException(new Exception("Error"), e.getMessage());
+            UtilidadAlertas.alertaError("Error", e.getMessage());
             return;
         }
 
