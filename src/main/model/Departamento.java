@@ -1,6 +1,6 @@
 package src.main.model;
 
-public class Departamento
+public abstract class Departamento
 {
     private int numero;
     private int cantidadHabitaciones;
@@ -14,15 +14,7 @@ public class Departamento
         this.cantidadHabitaciones = cantidadHabitaciones;
         this.nombreTipo = nombre;
         this.disponible = "Disponible";
-
-        switch (nombre)
-        {
-            case "Suite Penthouse" -> this.precio = (int) (250000000 * demanda);
-            case "Suite Ejecutiva" -> this.precio = (int) (180000000 * demanda);
-            case "Suite Familiar" -> this.precio = (int) (120000000 * demanda);
-            case "Estudio" -> this.precio = (int) (70000000 * demanda);
-            case "Estudio Económico" -> this.precio = (int) (40000000 * demanda);
-        }
+        this.precio = calcularPrecio(demanda);
     }
 
     public int getNumero() { return this.numero; }
@@ -47,5 +39,13 @@ public class Departamento
         else this.disponible = "No Disponible";
     }
 
-    public void setNombreTipo(String nombreTipo) { this.nombreTipo = nombreTipo;}
+    public void setPrecio(int precio)
+    {
+        this.precio = precio;
+    }
+
+    public void setNombreTipo(String nombreTipo) { this.nombreTipo = nombreTipo; }
+
+    // Implementación específica para Suite Penthouse
+    public abstract int calcularPrecio(double demanda);
 }

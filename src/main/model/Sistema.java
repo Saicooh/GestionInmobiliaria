@@ -67,7 +67,17 @@ public final class Sistema
                     String tipo = partes[i];
                     i++;
 
-                    Departamento departamento = new Departamento(numero, cantidadHabitaciones, tipo, demanda);
+                    Departamento departamento = null;
+
+                    switch (tipo)
+                    {
+                        case "Suite Penthouse" -> departamento = new SuitePenthouse(numero, cantidadHabitaciones, tipo, demanda);
+                        case "Suite Ejecutiva" -> departamento = new SuiteEjecutiva(numero, cantidadHabitaciones, tipo, demanda);
+                        case "Suite Familiar" -> departamento = new SuiteFamiliar(numero, cantidadHabitaciones, tipo, demanda);
+                        case "Estudio" -> departamento = new Estudio(numero, cantidadHabitaciones, tipo, demanda);
+                        case "Estudio Económico" -> departamento = new EstudioEconomico(numero, cantidadHabitaciones, tipo, demanda);
+                    }
+
                     edificio.getDepartamentos().add(departamento);
                     edificio.getMapaDepartamentos().put(numero, departamento);
                 }

@@ -33,7 +33,8 @@ public final class GeneradorXLSX
             headerRow.createCell(2).setCellValue("Tipo de Departamento");
             headerRow.createCell(3).setCellValue("Disponibilidad");
 
-            for (Departamento depto : edificio.getDepartamentos()) {
+            for (Departamento depto : edificio.getDepartamentos())
+            {
                 Row dataRow = sheet.createRow(rowNum++);
                 dataRow.createCell(0).setCellValue(depto.getNumero());
                 dataRow.createCell(1).setCellValue(depto.getCantidadHabitaciones());

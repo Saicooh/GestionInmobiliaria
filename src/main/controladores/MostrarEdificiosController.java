@@ -14,6 +14,7 @@ import src.main.resources.UtilidadAlertas;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class MostrarEdificiosController
 {
@@ -99,7 +100,16 @@ public class MostrarEdificiosController
         hBox.setAlignment(Pos.BASELINE_CENTER);
         dialog.getDialogPane().setContent(hBox);
 
-        dialog.showAndWait();
+        Optional<String> resultado = dialog.showAndWait();
+
+        if (resultado.isEmpty()) return null;
+
+        if (inputField.getText().isEmpty())
+        {
+            UtilidadAlertas.alertaError("Error", "No se ha ingresado un nombre para el archivo.");
+            return null;
+        }
+
         return inputField.getText() + ".xlsx"; // Obtener el valor del TextField personalizado
     }
 
@@ -112,6 +122,7 @@ public class MostrarEdificiosController
             UtilidadAlertas.alertaInformacion("Éxito", "La plantilla ha sido exitosamente generada con el nombre " + nombreArchivo + "." );
         }
     }
+
 
 
 

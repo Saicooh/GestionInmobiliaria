@@ -14,6 +14,7 @@ import src.main.resources.UtilidadAlertas;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class MostrarDepartamentosController
 {
@@ -81,7 +82,8 @@ public class MostrarDepartamentosController
     {
         String estadoSeleccionado = disponibilidadChoiceBox.getValue();
 
-        if(!estadoSeleccionado.equals("Todos")) {
+        if(!estadoSeleccionado.equals("Todos"))
+        {
             lista.removeIf(departamento -> !departamento.getDisponible().equals(estadoSeleccionado));
         }
     }
@@ -108,7 +110,16 @@ public class MostrarDepartamentosController
         hBox.setAlignment(Pos.BASELINE_CENTER);
         dialog.getDialogPane().setContent(hBox);
 
-        dialog.showAndWait();
+        Optional<String> resultado = dialog.showAndWait();
+
+        if (resultado.isEmpty()) return null;
+
+        if (inputField.getText().isEmpty())
+        {
+            UtilidadAlertas.alertaError("Error", "No se ha ingresado un nombre para el archivo.");
+            return null;
+        }
+
         return inputField.getText() + ".xlsx"; // Obtener el valor del TextField personalizado
     }
 

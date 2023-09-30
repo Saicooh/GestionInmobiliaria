@@ -38,15 +38,26 @@ public class Edificio
         for (int i = 0; i < cantidadIngresar; i++)
         {
             int numero = 1;
-
             while(mapaDepartamentos.containsKey(numero)) numero++;
 
-            Departamento departamento = new Departamento(numero, cantidadDeHabitaciones, nombreTipo, demanda);
+            Departamento departamento = null;
 
-            departamentos.add(departamento);
-            mapaDepartamentos.put(numero, departamento);
-            this.setCantidadDepartamentos(this.getCantidadDepartamentos() + 1);
-            this.setCantidadDepartamentosDisponibles(this.getCantidadDepartamentosDisponibles() + 1);
+            switch (nombreTipo)
+            {
+                case "Suite Penthouse" -> departamento = new SuitePenthouse(numero, cantidadDeHabitaciones, nombreTipo, demanda);
+                case "Suite Ejecutiva" -> departamento = new SuiteEjecutiva(numero, cantidadDeHabitaciones, nombreTipo, demanda);
+                case "Suite Familiar" -> departamento = new SuiteFamiliar(numero, cantidadDeHabitaciones, nombreTipo, demanda);
+                case "Estudio" -> departamento = new Estudio(numero, cantidadDeHabitaciones, nombreTipo, demanda);
+                case "Estudio Económico" -> departamento = new EstudioEconomico(numero, cantidadDeHabitaciones, nombreTipo, demanda);
+            }
+
+            if (departamento != null)
+            {
+                departamentos.add(departamento);
+                mapaDepartamentos.put(numero, departamento);
+                this.setCantidadDepartamentos(this.getCantidadDepartamentos() + 1);
+                this.setCantidadDepartamentosDisponibles(this.getCantidadDepartamentosDisponibles() + 1);
+            }
         }
     }
 
@@ -84,6 +95,15 @@ public class Edificio
 
         mapaDepartamentos.remove(numero);
         mapaDepartamentos.put(nuevoNumero, departamento);
+    }
+
+    public ArrayList<Departamento> filtrarPorDisponibilidad(ArrayList<Departamento> lista, String estado)
+    {
+        ArrayList<Departamento> listaFiltrada = new ArrayList<>(lista);
+        if (!estado.equals("Todos")) {
+            listaFiltrada.removeIf(departamento -> !departamento.getDisponible().equals(estado));
+        }
+        return listaFiltrada;
     }
 
     public String getNombre() { return this.nombre; }
