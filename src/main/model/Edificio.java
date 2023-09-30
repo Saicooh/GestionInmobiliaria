@@ -57,8 +57,6 @@ public class Edificio
         return departamento;
     }
 
-
-
     public void eliminarDepartamento(int numero) throws NoDepartamentoException
     {
         Departamento departamento = buscarDepartamento(numero);
@@ -74,7 +72,7 @@ public class Edificio
         Departamento departamento = this.buscarDepartamento(numero);
 
         if (nuevoNumero < 1 || cantHabitaciones < 1) throw new ArgumentoIlegalException();
-        if (mapaDepartamentos.containsKey(nuevoNumero)) throw new ArgumentoDuplicadoException();
+        if (mapaDepartamentos.containsKey(nuevoNumero) && numero != nuevoNumero) throw new ArgumentoDuplicadoException();
 
         if (departamento.getDisponible().equals("No disponible") && disponibilidad.equals("Disponible")) this.setCantidadDepartamentosDisponibles(this.getCantidadDepartamentosDisponibles() + 1);
         if (departamento.getDisponible().equals("Disponible") && disponibilidad.equals("No disponible")) this.setCantidadDepartamentosDisponibles(this.getCantidadDepartamentosDisponibles() - 1);

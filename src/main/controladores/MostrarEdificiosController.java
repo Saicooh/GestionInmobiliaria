@@ -3,12 +3,16 @@ package src.main.controladores;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import src.main.model.Edificio;
+import src.main.model.Sistema;
+import src.main.resources.GeneradorXLSX;
+import src.main.resources.UtilidadAlertas;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MostrarEdificiosController
@@ -79,6 +83,37 @@ public class MostrarEdificiosController
         Stage stage = (Stage) tablaEdificios.getScene().getWindow();
         stage.close();
     }
+
+    public String solicitarNombreArchivo()
+    {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Nombre del Archivo");
+        dialog.setHeaderText("Ingresa el nombre para la planilla:");
+        dialog.setContentText("Nombre:");
+
+        HBox hBox = new HBox(10);
+        TextField inputField = new TextField();
+        inputField.setText("nombre_default");
+        Label suffixLabel = new Label(".xlsx");
+        hBox.getChildren().addAll(inputField, suffixLabel);
+        hBox.setAlignment(Pos.BASELINE_CENTER);
+        dialog.getDialogPane().setContent(hBox);
+
+        dialog.showAndWait();
+        return inputField.getText() + ".xlsx"; // Obtener el valor del TextField personalizado
+    }
+
+    public void exportarExcel() throws IOException
+    {
+        String nombreArchivo = solicitarNombreArchivo();
+        if (nombreArchivo != null)
+        {
+            GeneradorXLSX.generarArchivoXLSX(Sistema.getListaEdificios(), nombreArchivo);
+            UtilidadAlertas.alertaInformacion("Éxito", "La plantilla ha sido exitosamente generada con el nombre " + nombreArchivo + "." );
+        }
+    }
+
+
 
     public static class EdificioTabla
     {

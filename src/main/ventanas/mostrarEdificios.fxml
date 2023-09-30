@@ -30,5 +30,8 @@
         </columns>
     </TableView>
 
-    <Button text="Cerrar" onAction="#cerrarVentana" />
+    <HBox spacing="10" alignment="BASELINE_CENTER">
+        <Button text="Exportar a Planilla de Cálculo" onAction="#exportarExcel" />
+        <Button text="Cerrar" onAction="#cerrarVentana" />
+    </HBox>
 </VBox>

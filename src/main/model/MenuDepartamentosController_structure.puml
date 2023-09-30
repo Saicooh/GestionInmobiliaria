@@ -1,0 +1,469 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": false,
+    "cutTests": false,
+    "cutClient": false,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": false,
+    "cutConstructors": false
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": false,
+    "hideInterfaceCalls": false, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "BothDirections" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "src.main.controladores.MenuDepartamentosController",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_3343801 { 
+   	label=main
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1160176796 { 
+   	label=controladores
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   AgregarDepartamentoController678787866[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)AgregarDepartamentoController</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   agregarDepartamentoButton: Button [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   cantDepartamentosTextField: TextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   cantHabitacionesTextField: TextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   edificioActual: Edificio [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   tipoDeDepartamentoComboBox: ComboBox&lt;String&gt; [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- agregarDepartamento()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialize()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setEdificioActual(edificio: Edificio)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+BuscarDepartamentoController678787866[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)BuscarDepartamentoController</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   buscarButton: Button [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   datosDepartamentoLabel: Label [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   datosDepartamentoLabel2: Label [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   edificioActual: Edificio [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   numeroDepartamentoField: TextField [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- buscarDepartamento()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setEdificioActual(edificio: Edificio)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ControladorConEdificio678787866[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(I)ControladorConEdificio</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ setEdificioActual(edificio: Edificio)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#F1E5FD"
+];
+
+DepartamentoTabla675474893[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)DepartamentoTabla</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   disponible: SimpleStringProperty [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   habitaciones: SimpleStringProperty [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   numero: SimpleStringProperty [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   precio: SimpleStringProperty [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   tipo: SimpleStringProperty [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ DepartamentoTabla(departamento: Departamento)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ disponibleProperty(): SimpleStringProperty</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getDisponible(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getHabitaciones(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getNumero(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getTipo(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ habitacionesProperty(): SimpleStringProperty</TD></TR>
+<TR><TD ALIGN="LEFT" >+ numeroProperty(): SimpleStringProperty</TD></TR>
+<TR><TD ALIGN="LEFT" >+ precioProperty(): SimpleStringProperty</TD></TR>
+<TR><TD ALIGN="LEFT" >+ tipoProperty(): SimpleStringProperty</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+EditarAtributosDeptoController678787866[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)EditarAtributosDeptoController</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   btnGuardar: Button [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   cantidadHabitacionesField: TextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   disponibleChoiceBox: ChoiceBox&lt;String&gt; [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   edificioActual: Edificio [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   feedbackLabel: Label [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   formularioEdicion: VBox [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   numeroDepartamentoField: TextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   numeroField: TextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   tipoChoiceBox: ChoiceBox&lt;String&gt; [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ buscarYMostrarDepartamento()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ guardarCambios()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setEdificioActual(edificio: Edificio)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+EliminarDepartamentoController678787866[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)EliminarDepartamentoController</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   edificio: Edificio [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   eliminarDepartamentoButton: Button [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   numeroDepartamentoTextField: TextField [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- eliminarDepartamento()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setEdificio(edificio: Edificio)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setEdificioActual(edificio: Edificio)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+MenuDepartamentosController678787866[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)MenuDepartamentosController</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   edificio: Edificio [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   nombreEdTextField: TextField [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- agregarDepartamento()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ buscarDepartamento()</TD></TR>
+<TR><TD ALIGN="LEFT" >- editarDepartamento()</TD></TR>
+<TR><TD ALIGN="LEFT" >- eliminarDepartamento()</TD></TR>
+<TR><TD ALIGN="LEFT" >- mostrarDepartamentos()</TD></TR>
+<TR><TD ALIGN="LEFT" >- mostrarVentana(fxmlResource: String, titulo: String): T</TD></TR>
+<TR><TD ALIGN="LEFT" >- obtenerEdificioValidado(nombre: String): Edificio</TD></TR>
+<TR><TD ALIGN="LEFT" >- operacionDepartamento(fxmlResource: String, titulo: String, configuracion: Consumer&lt;ControladorConEdificio&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >- validarNombreEdificio()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ volver()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+MostrarDepartamentosController678787866[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)MostrarDepartamentosController</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   columnaDisponibilidad: TableColumn&lt;DepartamentoTabla, String&gt; [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   columnaDisponible: TableColumn&lt;DepartamentoTabla, String&gt; [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   columnaHabitaciones: TableColumn&lt;DepartamentoTabla, String&gt; [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   columnaNumero: TableColumn&lt;DepartamentoTabla, String&gt; [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   columnaPrecio: TableColumn&lt;DepartamentoTabla, String&gt; [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   columnaTipo: TableColumn&lt;DepartamentoTabla, String&gt; [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   disponibilidadChoiceBox: ChoiceBox&lt;String&gt; [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   listaOriginalDeDepartamentos: ArrayList&lt;Departamento&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   tablaDepartamentos: TableView&lt;DepartamentoTabla&gt; [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- actualizarTabla(lista: ArrayList&lt;Departamento&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >- cerrarVentana()</TD></TR>
+<TR><TD ALIGN="LEFT" >- filtrar()</TD></TR>
+<TR><TD ALIGN="LEFT" >- filtrarPorDisponibilidad(lista: ArrayList&lt;Departamento&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialize()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ mostrarDepartamentos(listaDepartamentos: ArrayList&lt;Departamento&gt;)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_473236528 { 
+   	label=resources
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   Constantes1237821062[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Constantes</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- Constantes()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getAdministrarDepartamentos(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getAgregarDepartamentos(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getAgregarEdificio(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getBuscarDepartamentos(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getBuscarEdificio(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getCSV(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getEditarDepartamento(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getEliminarDepartamentos(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getEliminarEdificio(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getErrorIngresar(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getErrorOpcion(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getInicio(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getMenuPrincipal(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getMostrarDepartamentos(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getMostrarEdificios(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getReporte(): String</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+FaltaDatosException577915962[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)FaltaDatosException</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ FaltaDatosException()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+UtilidadAlertas1237821062[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)UtilidadAlertas</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- UtilidadAlertas()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ alertaError(header: String, mensaje: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ alertaInformacion(header: String, mensaje: String)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_600899916 { 
+   	label=model
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   Departamento1140099326[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Departamento</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   cantidadHabitaciones: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   disponible: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   nombreTipo: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   numero: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   precio: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Departamento(numero: int, cantidadHabitaciones: int, nombre: String, demanda: double)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getCantidadHabitaciones(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getDisponible(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getInformacionCompleta(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getNombreTipo(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getNumero(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getPrecio(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setCantidadHabitaciones(cantidadHabitaciones: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setDisponible(disponible: boolean)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setNombreTipo(nombreTipo: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setNumero(numero: int)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Edificio1140099326[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Edificio</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   cantidadDepartamentos: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   cantidadDepartamentosDisponibles: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   demanda: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   departamentos: ArrayList&lt;Departamento&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   direccion: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   mapaDepartamentos: HashMap&lt;Integer, Departamento&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   nombre: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Edificio(nombre: String, direccion: String, demanda: double)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ agregarDepartamento(cantidadIngresar: int, cantidadDeHabitaciones: int, nombreTipo: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ buscarDepartamento(numero: int): Departamento</TD></TR>
+<TR><TD ALIGN="LEFT" >+ editarDepartamento(numero: int, nuevoNumero: int, cantHabitaciones: int, nombreTipo: String, disponibilidad: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ eliminarDepartamento(numero: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getCantidadDepartamentos(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getCantidadDepartamentosDisponibles(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getCantidadDepartamentosNoDisponibles(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getDemanda(): double</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getDepartamentos(): ArrayList&lt;Departamento&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getDireccion(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getInformacionCompleta(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getMapaDepartamentos(): HashMap&lt;Integer, Departamento&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getNombre(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setCantidadDepartamentos(cantidadDepartamentos: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setCantidadDepartamentosDisponibles(cantidadDepartamentosDisponibles: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setDemanda(demanda: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setDireccion(direccion: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setNombre(nombre: String)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Sistema1140099326[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Sistema</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- Sistema()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ agregarEdificio(nombre: String, direccion: String, demanda: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ buscarEdificio(nombre: String): Edificio</TD></TR>
+<TR><TD ALIGN="LEFT" >+ eliminarEdificio(edificio: Edificio)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getListaEdificios(): ArrayList&lt;Edificio&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getMapaEdificios(): HashMap&lt;String, Edificio&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ guardarEnCSV(rutaCSV: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ inicializarCSV(rutaCSV: String)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+} 
+
+'edges    
+AgregarDepartamentoController678787866 -> Constantes1237821062[label="agregarDepartamento() -> getCSV()"];
+AgregarDepartamentoController678787866 -> Edificio1140099326[label="edificioActual
+[0..1]"];
+AgregarDepartamentoController678787866 -> FaltaDatosException577915962[label="agregarDepartamento() -> FaltaDatosException()"];
+AgregarDepartamentoController678787866 -> Sistema1140099326[label="agregarDepartamento() -> guardarEnCSV()"];
+BuscarDepartamentoController678787866 -> Departamento1140099326[label="buscarDepartamento() -> getInformacionCompleta()"];
+BuscarDepartamentoController678787866 -> Edificio1140099326[label="edificioActual
+[0..1]"];
+BuscarDepartamentoController678787866 -> FaltaDatosException577915962[label="buscarDepartamento() -> FaltaDatosException()"];
+ControladorConEdificio678787866 -> AgregarDepartamentoController678787866[arrowhead=none, arrowtail=empty, dir=both];
+ControladorConEdificio678787866 -> BuscarDepartamentoController678787866[arrowhead=none, arrowtail=empty, dir=both];
+ControladorConEdificio678787866 -> EditarAtributosDeptoController678787866[arrowhead=none, arrowtail=empty, dir=both];
+ControladorConEdificio678787866 -> EliminarDepartamentoController678787866[arrowhead=none, arrowtail=empty, dir=both];
+EditarAtributosDeptoController678787866 -> Constantes1237821062[label="guardarCambios() -> getCSV()"];
+EditarAtributosDeptoController678787866 -> Edificio1140099326[label="edificioActual
+[0..1]"];
+EditarAtributosDeptoController678787866 -> FaltaDatosException577915962[label="buscarYMostrarDepartamento() -> FaltaDatosException()"];
+EditarAtributosDeptoController678787866 -> Sistema1140099326[label="guardarCambios() -> guardarEnCSV()"];
+EliminarDepartamentoController678787866 -> Constantes1237821062[label="eliminarDepartamento() -> getCSV()"];
+EliminarDepartamentoController678787866 -> Edificio1140099326[label="edificio
+[0..1]"];
+EliminarDepartamentoController678787866 -> Sistema1140099326[label="eliminarDepartamento() -> guardarEnCSV()"];
+MenuDepartamentosController678787866 -> Edificio1140099326[label="edificio
+[0..1]"];
+MenuDepartamentosController678787866 -> MostrarDepartamentosController678787866[label="mostrarDepartamentos() -> mostrarDepartamentos()"];
+MenuDepartamentosController678787866 -> Sistema1140099326[label="obtenerEdificioValidado() -> buscarEdificio()"];
+MostrarDepartamentosController678787866 -> Departamento1140099326[label="listaOriginalDeDepartamentos
+[0..*]"];
+MostrarDepartamentosController678787866 -> DepartamentoTabla675474893[label="columnaDisponibilidad
+[0..1]"];
+MostrarDepartamentosController678787866 -> DepartamentoTabla675474893[label="columnaDisponible
+[0..1]"];
+MostrarDepartamentosController678787866 -> DepartamentoTabla675474893[label="columnaHabitaciones
+[0..1]"];
+MostrarDepartamentosController678787866 -> DepartamentoTabla675474893[label="columnaNumero
+[0..1]"];
+MostrarDepartamentosController678787866 -> DepartamentoTabla675474893[label="columnaPrecio
+[0..1]"];
+MostrarDepartamentosController678787866 -> DepartamentoTabla675474893[label="columnaTipo
+[0..1]"];
+MostrarDepartamentosController678787866 -> DepartamentoTabla675474893[label="tablaDepartamentos
+[0..1]"];
+    
+}
+@enduml

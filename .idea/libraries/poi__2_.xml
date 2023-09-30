@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="poi (2)">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/src/main/resources/librerias-externas/poi" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/src/main/resources/librerias-externas/poi" recursive="false" />
+  </library>
+</component>

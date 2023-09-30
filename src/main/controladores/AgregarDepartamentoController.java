@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import src.main.model.Edificio;
 import src.main.model.Sistema;
 import src.main.resources.Constantes;
@@ -32,7 +33,8 @@ public class AgregarDepartamentoController implements ControladorConEdificio
     private ComboBox<String> tipoDeDepartamentoComboBox;
 
     @FXML
-    public void initialize() {
+    public void initialize()
+    {
         tipoDeDepartamentoComboBox.getItems().addAll("Suite Penthouse", "Suite Ejecutiva", "Suite Familiar", "Estudio", "Estudio Económico");
     }
 

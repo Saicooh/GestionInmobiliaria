@@ -19,6 +19,8 @@ public final class Constantes
 
     private static final String REPORTE = "Reporte.csv";
 
+    private static final String PLANILLA = "Planilla.xlsx";
+
     private static final String ADMINISTRAR_DEPARTAMENTOS = "/src/main/ventanas/administrarDepartamentos.fxml";
 
     private static final String AGREGAR_DEPARTAMENTOS = "/src/main/ventanas/agregarDepartamento.fxml";
@@ -51,6 +53,8 @@ public final class Constantes
 
     public static String getReporte() { return REPORTE; }
 
+    public static String getPlanilla() { return PLANILLA; }
+
     public static String getAdministrarDepartamentos() { return ADMINISTRAR_DEPARTAMENTOS; }
 
     public static String getAgregarDepartamentos() { return AGREGAR_DEPARTAMENTOS; }
@@ -64,7 +68,5 @@ public final class Constantes
     public static String getEditarDepartamento() { return EDITAR_DEPARTAMENTO; }
 
     public static String getErrorIngresar() { return ERROR_INGRESAR; }
-
-    public static String getErrorOpcion() { return ERROR_OPCION; }
 
 }
