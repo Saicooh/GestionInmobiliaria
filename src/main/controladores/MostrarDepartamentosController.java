@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 public class MostrarDepartamentosController
 {
-
     @FXML
     public TableView<DepartamentoTabla> tablaDepartamentos;
     @FXML
