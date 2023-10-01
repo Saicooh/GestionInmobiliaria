@@ -29,6 +29,16 @@ public final class Sistema
         return edificio;
     }
 
+    public static ArrayList<Edificio> filtrarPorDemanda(ArrayList<Edificio> listaFiltrada, ArrayList<Edificio>listaOriginalDeEdificios, double minDemanda, double maxDemanda)
+    {
+        for (Edificio edificio : listaOriginalDeEdificios)
+        {
+            if (edificio.getDemanda() >= minDemanda && edificio.getDemanda() <= maxDemanda) listaFiltrada.add(edificio);
+        }
+
+        return listaFiltrada;
+    }
+
     public static void eliminarEdificio(Edificio edificio)
     {
         mapaEdificios.remove(edificio.getNombre());

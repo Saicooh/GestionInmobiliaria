@@ -97,7 +97,7 @@ public class Edificio
         mapaDepartamentos.put(nuevoNumero, departamento);
     }
 
-    public ArrayList<Departamento> filtrarPorDisponibilidad(ArrayList<Departamento> lista, String estado)
+    public static ArrayList<Departamento> filtrarPorDisponibilidad(ArrayList<Departamento> lista, String estado)
     {
         ArrayList<Departamento> listaFiltrada = new ArrayList<>(lista);
         if (!estado.equals("Todos")) {

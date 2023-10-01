@@ -8,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import src.main.model.Departamento;
+import src.main.model.Edificio;
 import src.main.resources.GeneradorXLSX;
 import src.main.model.Sistema;
 import src.main.resources.UtilidadAlertas;
@@ -60,7 +61,6 @@ public class MostrarDepartamentosController
     }
 
     @FXML
-
     private void actualizarTabla(ArrayList<Departamento> lista)
     {
         tablaDepartamentos.getItems().clear();
@@ -74,19 +74,9 @@ public class MostrarDepartamentosController
     {
         ArrayList<Departamento> listaFiltrada = new ArrayList<>(listaOriginalDeDepartamentos);
 
-        filtrarPorDisponibilidad(listaFiltrada);
+        listaFiltrada = Edificio.filtrarPorDisponibilidad(listaFiltrada, disponibilidadChoiceBox.getValue());
 
         actualizarTabla(listaFiltrada);
-    }
-
-    private void filtrarPorDisponibilidad(ArrayList<Departamento> lista)
-    {
-        String estadoSeleccionado = disponibilidadChoiceBox.getValue();
-
-        if(!estadoSeleccionado.equals("Todos"))
-        {
-            lista.removeIf(departamento -> !departamento.getDisponible().equals(estadoSeleccionado));
-        }
     }
 
     @FXML

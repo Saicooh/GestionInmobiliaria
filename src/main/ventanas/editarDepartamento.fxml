@@ -61,5 +61,5 @@
     </VBox>
 
     <!-- Mensajes de feedback para el usuario -->
-    <Label fx:id="feedbackLabel" text="Hola" />
+    <Label fx:id="feedbackLabel"  />
 </VBox>

@@ -14,7 +14,7 @@
         <TextField fx:id="minDemandaField" promptText="Min" />
         <Label text="a" />
         <TextField fx:id="maxDemandaField" promptText="Max" />
-        <Button text="Filtrar" onAction="#filtrarPorDemanda" />
+        <Button text="Filtrar" onAction="#filtrar" />
     </HBox>
 
     <!-- Tabla de Edificios -->

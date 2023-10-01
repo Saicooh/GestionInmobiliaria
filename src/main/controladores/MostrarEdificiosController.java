@@ -56,17 +56,20 @@ public class MostrarEdificiosController
     }
 
     @FXML
-    private void filtrarPorDemanda()
+    private void filtrar()
     {
-        double minDemanda = Double.parseDouble(minDemandaField.getText());
-        double maxDemanda = Double.parseDouble(maxDemandaField.getText());
+        String minDemanda = (minDemandaField.getText());
+        String maxDemanda = (maxDemandaField.getText());
+
+        if(Double.parseDouble(minDemanda) > Double.parseDouble(maxDemanda))
+        {
+            UtilidadAlertas.alertaError("Error", "La demanda mínima no puede ser mayor a la demanda máxima.");
+            return;
+        }
 
         ArrayList<Edificio> listaFiltrada = new ArrayList<>();
 
-        for (Edificio edificio : listaOriginalDeEdificios)
-        {
-            if (edificio.getDemanda() >= minDemanda && edificio.getDemanda() <= maxDemanda) listaFiltrada.add(edificio);
-        }
+        listaFiltrada = Sistema.filtrarPorDemanda(listaFiltrada, listaOriginalDeEdificios, Double.parseDouble(minDemanda), Double.parseDouble(maxDemanda));
 
         actualizarTabla(listaFiltrada);
     }
