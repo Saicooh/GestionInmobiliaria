@@ -15,6 +15,8 @@ public class Edificio
     private String direccion;
     private int cantidadDepartamentos;
     private int cantidadDepartamentosDisponibles;
+
+    private int cantidadDepartamentosNoDisponibles;
     private final ArrayList<Departamento> departamentos;
 
     private final HashMap<Integer, Departamento> mapaDepartamentos;
@@ -44,11 +46,11 @@ public class Edificio
 
             switch (nombreTipo)
             {
-                case "Suite Penthouse" -> departamento = new SuitePenthouse(numero, cantidadDeHabitaciones, nombreTipo, demanda);
-                case "Suite Ejecutiva" -> departamento = new SuiteEjecutiva(numero, cantidadDeHabitaciones, nombreTipo, demanda);
-                case "Suite Familiar" -> departamento = new SuiteFamiliar(numero, cantidadDeHabitaciones, nombreTipo, demanda);
-                case "Estudio" -> departamento = new Estudio(numero, cantidadDeHabitaciones, nombreTipo, demanda);
-                case "Estudio Económico" -> departamento = new EstudioEconomico(numero, cantidadDeHabitaciones, nombreTipo, demanda);
+                case "Suite Penthouse" -> departamento = new TipoSuitePenthouse(numero, cantidadDeHabitaciones, nombreTipo, demanda);
+                case "Suite Ejecutiva" -> departamento = new TipoSuiteEjecutiva(numero, cantidadDeHabitaciones, nombreTipo, demanda);
+                case "Suite Familiar" -> departamento = new TipoSuiteFamiliar(numero, cantidadDeHabitaciones, nombreTipo, demanda);
+                case "Estudio" -> departamento = new TipoEstudio(numero, cantidadDeHabitaciones, nombreTipo, demanda);
+                case "Estudio Económico" -> departamento = new TipoEstudioEconomico(numero, cantidadDeHabitaciones, nombreTipo, demanda);
             }
 
             if (departamento != null)
@@ -85,8 +87,15 @@ public class Edificio
         if (nuevoNumero < 1 || cantHabitaciones < 1) throw new ArgumentoIlegalException();
         if (mapaDepartamentos.containsKey(nuevoNumero) && numero != nuevoNumero) throw new ArgumentoDuplicadoException();
 
-        if (departamento.getDisponible().equals("No disponible") && disponibilidad.equals("Disponible")) this.setCantidadDepartamentosDisponibles(this.getCantidadDepartamentosDisponibles() + 1);
-        if (departamento.getDisponible().equals("Disponible") && disponibilidad.equals("No disponible")) this.setCantidadDepartamentosDisponibles(this.getCantidadDepartamentosDisponibles() - 1);
+        if (departamento.getDisponible().equals("No Disponible") && disponibilidad.equals("Disponible"))
+        {
+            this.setCantidadDepartamentosDisponibles(this.getCantidadDepartamentosDisponibles() + 1);
+            this.cantidadDepartamentosNoDisponibles--;
+        }
+        if (departamento.getDisponible().equals("Disponible") && disponibilidad.equals("No Disponible")) {
+            this.setCantidadDepartamentosDisponibles(this.getCantidadDepartamentosDisponibles() - 1);
+            this.cantidadDepartamentosNoDisponibles++;
+        }
 
         departamento.setNumero(nuevoNumero);
         departamento.setCantidadHabitaciones(cantHabitaciones);
@@ -97,14 +106,22 @@ public class Edificio
         mapaDepartamentos.put(nuevoNumero, departamento);
     }
 
-    public static ArrayList<Departamento> filtrarPorDisponibilidad(ArrayList<Departamento> lista, String estado)
+    public static void filtrarDatos(ArrayList<Departamento> listaFiltrada, int cantValor) throws ArgumentoIlegalException
     {
-        ArrayList<Departamento> listaFiltrada = new ArrayList<>(lista);
-        if (!estado.equals("Todos")) {
+        if (cantValor < 1) throw new ArgumentoIlegalException();
+
+        listaFiltrada.removeIf(depto -> depto.getCantidadHabitaciones() != cantValor);
+    }
+
+
+    public static void filtrarDatos(ArrayList<Departamento> listaFiltrada, String estado)
+    {
+        if (!estado.equals("Todos"))
+        {
             listaFiltrada.removeIf(departamento -> !departamento.getDisponible().equals(estado));
         }
-        return listaFiltrada;
     }
+
 
     public String getNombre() { return this.nombre; }
 
@@ -118,7 +135,7 @@ public class Edificio
 
     public int getCantidadDepartamentosNoDisponibles()
     {
-        return this.getCantidadDepartamentos() - this.getCantidadDepartamentosDisponibles();
+        return this.cantidadDepartamentosNoDisponibles;
     }
 
     public String getInformacionCompleta()
@@ -140,6 +157,6 @@ public class Edificio
 
     public void setCantidadDepartamentosDisponibles(int cantidadDepartamentosDisponibles) { this.cantidadDepartamentosDisponibles = cantidadDepartamentosDisponibles; }
 
-
+    public void setCantidadDepartamentosNoDisponibles(int cantidadDepartamentosNoDisponibles) { this.cantidadDepartamentosNoDisponibles = cantidadDepartamentosNoDisponibles; }
 
 }

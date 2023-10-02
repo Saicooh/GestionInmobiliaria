@@ -1,6 +1,6 @@
 nombreEdificio,direccion,demanda,cantidad_departamentos,[DEPARTAMENTOS]numero,cantidadDeHab,tipo
-Edificio1,Dirección1,0.8,3,1,6,Suite Ejecutiva,2,4,Suite Ejecutiva,3,2,Estudio Económico
-Edificio2,Dirección2,0.7,3,1,4,Suite Familiar,2,3,Estudio,3,2,Estudio Económico
-Edificio3,Dirección3,0.2,3,1,3,Suite Penthouse,2,3,Suite Ejecutiva,3,4,Estudio
-Edificio4,Dirección4,1.1,3,1,2,Estudio Económico,2,4,Suite Familiar,3,5,Suite Penthouse
-Edificio5,Dirección5,0.9,3,1,4,Estudio,2,2,Suite Penthouse,3,3,Suite Ejecutiva
+Edificio1,Dirección1,0.8,3,1,6,Suite Ejecutiva,No Disponible,2,4,Suite Ejecutiva,No Disponible,3,2,Estudio Económico,Disponible
+Edificio2,Dirección2,0.7,3,1,4,Suite Familiar,Disponible,2,3,Estudio,Disponible,3,2,Estudio Económico,Disponible
+Edificio3,Dirección3,0.2,3,1,3,Suite Penthouse,Disponible,2,3,Suite Ejecutiva,Disponible,3,4,Estudio,Disponible
+Edificio4,Dirección4,1.1,3,1,2,Estudio Económico,Disponible,2,4,Suite Familiar,Disponible,3,5,Suite Penthouse,Disponible
+Edificio5,Dirección5,0.9,3,1,4,Estudio,Disponible,2,2,Suite Penthouse,Disponible,3,3,Suite Ejecutiva,Disponible

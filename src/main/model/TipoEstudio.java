@@ -1,8 +1,8 @@
 package src.main.model;
 
-public class Estudio extends Departamento
+public class TipoEstudio extends Departamento
 {
-    public Estudio(int numero, int cantidadHabitaciones, String nombre, double demanda)
+    public TipoEstudio(int numero, int cantidadHabitaciones, String nombre, double demanda)
     {
         super(numero, cantidadHabitaciones, nombre, demanda);
     }
@@ -11,7 +11,7 @@ public class Estudio extends Departamento
     @Override
     public int calcularPrecio(double demanda)
     {
-        return (int) (180000000 * demanda);
+        return (int) (70000000 * demanda);
     }
     // ...
 }

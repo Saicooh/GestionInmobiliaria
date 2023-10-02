@@ -14,7 +14,6 @@ public class GestionInmobiliaria extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        Sistema.inicializarCSV(Constantes.getCSV());
         // Carga el archivo FXML del menú principal
         FXMLLoader loader = new FXMLLoader(getClass().getResource(Constantes.getInicio()));
         Parent root = loader.load();
@@ -32,7 +31,10 @@ public class GestionInmobiliaria extends Application
         mainMenuController.setPrimaryStage(primaryStage);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
+        Sistema.inicializarCSV(Constantes.getCSV());
+        Sistema.datosIniciales();
         launch(args);
     }
 }

@@ -13,7 +13,7 @@ import src.main.resources.excepciones.FaltaDatosException;
 
 import java.io.IOException;
 
-public class AgEdificioController
+public class AgregarEdificioController
 {
 
     @FXML

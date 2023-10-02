@@ -1,8 +1,8 @@
 package src.main.model;
 
-public class SuitePenthouse extends Departamento
+public class TipoSuiteFamiliar extends Departamento
 {
-    public SuitePenthouse(int numero, int cantidadHabitaciones, String nombre, double demanda)
+    public TipoSuiteFamiliar(int numero, int cantidadHabitaciones, String nombre, double demanda)
     {
         super(numero, cantidadHabitaciones, nombre, demanda);
     }
@@ -11,8 +11,6 @@ public class SuitePenthouse extends Departamento
     @Override
     public int calcularPrecio(double demanda)
     {
-        return (int) (250000000 * demanda);
+        return (int) (120000000 * demanda);
     }
-    // ...
 }
-

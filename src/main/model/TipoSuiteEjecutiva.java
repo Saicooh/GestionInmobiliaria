@@ -1,8 +1,8 @@
 package src.main.model;
 
-public class EstudioEconomico extends Departamento
+public class TipoSuiteEjecutiva extends Departamento
 {
-    public EstudioEconomico(int numero, int cantidadHabitaciones, String nombre, double demanda)
+    public TipoSuiteEjecutiva(int numero, int cantidadHabitaciones, String nombre, double demanda)
     {
         super(numero, cantidadHabitaciones, nombre, demanda);
     }

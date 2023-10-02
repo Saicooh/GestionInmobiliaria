@@ -12,36 +12,62 @@ import src.main.model.Edificio;
 import src.main.resources.GeneradorXLSX;
 import src.main.model.Sistema;
 import src.main.resources.UtilidadAlertas;
+import src.main.resources.excepciones.ArgumentoIlegalException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class MostrarDepartamentosController
-{
+public class MostrarDepartamentosController {
     @FXML
-    public TableView<DepartamentoTabla> tablaDepartamentos;
+    private TableView<DepartamentoTabla> tablaDepartamentos;
     @FXML
-    public TableColumn<DepartamentoTabla, String> columnaNumero;
+    private TableColumn<DepartamentoTabla, String> columnaNumero;
     @FXML
-    public TableColumn<DepartamentoTabla, String> columnaHabitaciones;
+    private TableColumn<DepartamentoTabla, String> columnaHabitaciones;
     @FXML
-    public TableColumn<DepartamentoTabla, String> columnaTipo;
+    private TableColumn<DepartamentoTabla, String> columnaTipo;
     @FXML
-    public TableColumn<DepartamentoTabla, String> columnaDisponible;
+    private TableColumn<DepartamentoTabla, String> columnaDisponible;
     @FXML
-    public TableColumn<DepartamentoTabla, String> columnaPrecio;
+    private TableColumn<DepartamentoTabla, String> columnaPrecio;
     @FXML
-    public TableColumn<DepartamentoTabla, String> columnaDisponibilidad;
+    private TableColumn<DepartamentoTabla, String> columnaDisponibilidad;
+    @FXML
+    private ComboBox<String> filtroComboBox;
+    @FXML
+    private HBox habitacionesBox;
 
     @FXML
     private ChoiceBox<String> disponibilidadChoiceBox;
 
     @FXML
+    private TextField habitacionesField;
+
     public void initialize()
     {
-        disponibilidadChoiceBox.getItems().addAll("Disponible", "No Disponible", "Todos");
-        disponibilidadChoiceBox.setValue("Todos");  // Valor por defecto
+        filtroComboBox.valueProperty().addListener((observable, oldValue, newValue) ->
+        {
+            if ("Disponibilidad".equals(newValue)) {
+                habitacionesBox.setVisible(false);
+                habitacionesBox.setManaged(false);
+                disponibilidadChoiceBox.setVisible(true);
+                disponibilidadChoiceBox.setManaged(true);
+
+            } else if ("Habitaciones".equals(newValue)){
+                habitacionesBox.setVisible(true);
+                habitacionesBox.setManaged(true);
+                habitacionesField.setVisible(true);
+                habitacionesField.setManaged(true);
+                disponibilidadChoiceBox.setVisible(false);
+                disponibilidadChoiceBox.setManaged(false);
+            } else {
+                habitacionesBox.setVisible(false);
+                habitacionesBox.setManaged(false);
+                disponibilidadChoiceBox.setVisible(false);
+                disponibilidadChoiceBox.setManaged(false);
+            }
+        });
     }
 
     private final ArrayList<Departamento> listaOriginalDeDepartamentos = new ArrayList<>();
@@ -74,10 +100,51 @@ public class MostrarDepartamentosController
     {
         ArrayList<Departamento> listaFiltrada = new ArrayList<>(listaOriginalDeDepartamentos);
 
-        listaFiltrada = Edificio.filtrarPorDisponibilidad(listaFiltrada, disponibilidadChoiceBox.getValue());
+        String filtroSeleccionado = filtroComboBox.getValue();
+
+        if ("Disponibilidad".equals(filtroSeleccionado)) {
+            disponibilidadChoiceBox.setVisible(true);
+            disponibilidadChoiceBox.setManaged(true);
+            habitacionesField.setVisible(false);
+            habitacionesBox.setManaged(false);
+
+            String estadoSeleccionado = disponibilidadChoiceBox.getValue();
+            Edificio.filtrarDatos(listaFiltrada, estadoSeleccionado);
+
+        }
+        else if ("Habitaciones".equals(filtroSeleccionado))
+        {
+            disponibilidadChoiceBox.setVisible(false);
+            disponibilidadChoiceBox.setManaged(false);
+            habitacionesBox.setVisible(true);
+            habitacionesBox.setManaged(true);
+
+            try
+            {
+                int habitaciones = Integer.parseInt(habitacionesField.getText());
+                Edificio.filtrarDatos(listaFiltrada, habitaciones);
+            }
+            catch (NumberFormatException e)
+            {
+                UtilidadAlertas.alertaError("Error", "Por favor, ingrese un número válido en el campo de habitaciones.");
+                return;
+            }
+            catch (ArgumentoIlegalException e)
+            {
+                UtilidadAlertas.alertaError("Error", e.getMessage());
+            }
+        }
+        else
+        {
+            disponibilidadChoiceBox.setVisible(false);
+            disponibilidadChoiceBox.setManaged(false);
+            habitacionesField.setVisible(false);
+            habitacionesField.setManaged(false);
+        }
 
         actualizarTabla(listaFiltrada);
     }
+
 
     @FXML
     private void cerrarVentana()
@@ -86,8 +153,7 @@ public class MostrarDepartamentosController
         stage.close();
     }
 
-    public String solicitarNombreArchivo()
-    {
+    public String solicitarNombreArchivo() {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Nombre del Archivo");
         dialog.setHeaderText("Ingresa el nombre para la planilla:");
@@ -105,8 +171,7 @@ public class MostrarDepartamentosController
 
         if (resultado.isEmpty()) return null;
 
-        if (inputField.getText().isEmpty())
-        {
+        if (inputField.getText().isEmpty()) {
             UtilidadAlertas.alertaError("Error", "No se ha ingresado un nombre para el archivo.");
             return null;
         }
@@ -114,26 +179,22 @@ public class MostrarDepartamentosController
         return inputField.getText() + ".xlsx"; // Obtener el valor del TextField personalizado
     }
 
-    public void exportarExcel() throws IOException
-    {
+    public void exportarExcel() throws IOException {
         String nombreArchivo = solicitarNombreArchivo();
-        if (nombreArchivo != null)
-        {
+        if (nombreArchivo != null) {
             GeneradorXLSX.generarArchivoXLSX(Sistema.getListaEdificios(), nombreArchivo);
-            UtilidadAlertas.alertaInformacion("Éxito", "La plantilla ha sido exitosamente generada con el nombre " + nombreArchivo + "." );
+            UtilidadAlertas.alertaInformacion("Éxito", "La plantilla ha sido exitosamente generada con el nombre " + nombreArchivo + ".");
         }
     }
 
-    public static class DepartamentoTabla
-    {
+    public static class DepartamentoTabla {
         private final SimpleStringProperty numero;
         private final SimpleStringProperty habitaciones;
         private final SimpleStringProperty tipo;
         private final SimpleStringProperty disponible;
         private final SimpleStringProperty precio;
 
-        public DepartamentoTabla(Departamento departamento)
-        {
+        public DepartamentoTabla(Departamento departamento) {
             this.numero = new SimpleStringProperty(String.valueOf(departamento.getNumero()));
             this.habitaciones = new SimpleStringProperty(String.valueOf(departamento.getCantidadHabitaciones()));
             this.tipo = new SimpleStringProperty(departamento.getNombreTipo());
@@ -173,8 +234,7 @@ public class MostrarDepartamentosController
             return disponible;
         }
 
-        public SimpleStringProperty precioProperty()
-        {
+        public SimpleStringProperty precioProperty() {
             return precio;
         }
     }

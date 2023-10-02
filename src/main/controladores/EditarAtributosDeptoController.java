@@ -67,8 +67,7 @@ public class EditarAtributosDeptoController implements ControladorConEdificio
 
     public void guardarCambios() throws IOException
     {
-        try
-        {
+        try {
 
             int numero = Integer.parseInt(numeroDepartamentoField.getText());
 

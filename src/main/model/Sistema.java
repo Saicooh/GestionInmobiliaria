@@ -1,6 +1,9 @@
 package src.main.model;
 
+import src.main.resources.UtilidadAlertas;
 import src.main.resources.excepciones.ArgumentoDuplicadoException;
+import src.main.resources.excepciones.ArgumentoIlegalException;
+import src.main.resources.excepciones.FaltaDatosException;
 import src.main.resources.excepciones.NoEdificioException;
 
 import java.io.*;
@@ -13,7 +16,7 @@ public final class Sistema
     private static final HashMap<String, Edificio> mapaEdificios = new HashMap<>(100, 0.75f);
     private static final ArrayList<Edificio> listaEdificios = new ArrayList<>();
 
-    public static void agregarEdificio(String nombre, String direccion, int demanda) throws ArgumentoDuplicadoException
+    public static void agregarEdificio(String nombre, String direccion, double demanda) throws ArgumentoDuplicadoException
     {
         if (mapaEdificios.containsKey(nombre)) throw new ArgumentoDuplicadoException();
 
@@ -29,20 +32,49 @@ public final class Sistema
         return edificio;
     }
 
-    public static ArrayList<Edificio> filtrarPorDemanda(ArrayList<Edificio> listaFiltrada, ArrayList<Edificio>listaOriginalDeEdificios, double minDemanda, double maxDemanda)
+    public static void filtrarPorDemanda(ArrayList<Edificio> listaFiltrada, ArrayList<Edificio>listaOriginalDeEdificios, double minDemanda, double maxDemanda)
     {
         for (Edificio edificio : listaOriginalDeEdificios)
-        {
             if (edificio.getDemanda() >= minDemanda && edificio.getDemanda() <= maxDemanda) listaFiltrada.add(edificio);
-        }
-
-        return listaFiltrada;
     }
 
     public static void eliminarEdificio(Edificio edificio)
     {
         mapaEdificios.remove(edificio.getNombre());
         listaEdificios.remove(edificio);
+    }
+
+    public static void datosIniciales()
+    {
+        Random rand = new Random();
+
+        try
+        {
+            for (int i = 6; i <= 25; i++)
+            {
+                double demandaSinRedondear = 0.5 + (1.3 - 0.5) * rand.nextDouble();
+                double demandaAleatoria = Math.round(demandaSinRedondear * 10.0) / 10.0;
+                agregarEdificio("Edificio " + i, "Dirección " + i, demandaAleatoria);
+
+                Edificio edificioActual = buscarEdificio("Edificio " + i);
+
+                int cantidadDeptos = rand.nextInt(5) + 1; // Generar entre 1 y 5 departamentos
+
+                for (int j = 0; j < cantidadDeptos; j++)
+                {
+                    int cantidadHabitaciones = rand.nextInt(5) + 1; // Generar entre 1 y 5 habitaciones
+
+                    String[] tipos = {"Suite Penthouse", "Suite Ejecutiva", "Suite Familiar", "Estudio", "Estudio Económico"};
+                    String tipoAleatorio = tipos[rand.nextInt(tipos.length)];
+
+                    edificioActual.agregarDepartamento(1, cantidadHabitaciones, tipoAleatorio);
+                }
+            }
+        }
+        catch (ArgumentoDuplicadoException | NoEdificioException | ArgumentoIlegalException | FaltaDatosException e)
+        {
+            UtilidadAlertas.alertaError("Error", e.getMessage());
+        }
     }
 
     public static void inicializarCSV(String rutaCSV)
@@ -81,11 +113,27 @@ public final class Sistema
 
                     switch (tipo)
                     {
-                        case "Suite Penthouse" -> departamento = new SuitePenthouse(numero, cantidadHabitaciones, tipo, demanda);
-                        case "Suite Ejecutiva" -> departamento = new SuiteEjecutiva(numero, cantidadHabitaciones, tipo, demanda);
-                        case "Suite Familiar" -> departamento = new SuiteFamiliar(numero, cantidadHabitaciones, tipo, demanda);
-                        case "Estudio" -> departamento = new Estudio(numero, cantidadHabitaciones, tipo, demanda);
-                        case "Estudio Económico" -> departamento = new EstudioEconomico(numero, cantidadHabitaciones, tipo, demanda);
+                        case "Suite Penthouse" -> departamento = new TipoSuitePenthouse(numero, cantidadHabitaciones, tipo, demanda);
+                        case "Suite Ejecutiva" -> departamento = new TipoSuiteEjecutiva(numero, cantidadHabitaciones, tipo, demanda);
+                        case "Suite Familiar" -> departamento = new TipoSuiteFamiliar(numero, cantidadHabitaciones, tipo, demanda);
+                        case "Estudio" -> departamento = new TipoEstudio(numero, cantidadHabitaciones, tipo, demanda);
+                        case "Estudio Económico" -> departamento = new TipoEstudioEconomico(numero, cantidadHabitaciones, tipo, demanda);
+                    }
+
+                    String disponibilidad = partes[i];
+                    i++;
+
+                    assert departamento != null;
+
+                    if (disponibilidad.equals("Disponible"))
+                    {
+                        departamento.setDisponible(true);
+                        edificio.setCantidadDepartamentosDisponibles(edificio.getCantidadDepartamentosDisponibles() + 1);
+                    }
+                    else
+                    {
+                        departamento.setDisponible(false);
+                        edificio.setCantidadDepartamentosNoDisponibles(edificio.getCantidadDepartamentosNoDisponibles() + 1);
                     }
 
                     edificio.getDepartamentos().add(departamento);
@@ -122,6 +170,7 @@ public final class Sistema
                     linea.append(",").append(depto.getNumero());
                     linea.append(",").append(depto.getCantidadHabitaciones());
                     linea.append(",").append(depto.getNombreTipo());
+                    linea.append(",").append(depto.getDisponible());
                 }
 
                 writer.write(linea + "\n");

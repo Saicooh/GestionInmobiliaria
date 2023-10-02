@@ -21,7 +21,7 @@ public class MenuDepartamentosController
 {
     private Edificio edificio;
     @FXML
-    public TextField nombreEdTextField;
+    private TextField nombreEdTextField;
 
     private void operacionDepartamento(String fxmlResource, String titulo, Consumer<ControladorConEdificio> configuracion)
     {

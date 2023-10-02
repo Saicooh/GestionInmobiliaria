@@ -2,16 +2,42 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.collections.FXCollections?>
 
+<?import java.lang.String?>
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
       fx:controller="src.main.controladores.MostrarDepartamentosController"
-      alignment="CENTER" spacing="10">
+      alignment="CENTER" spacing="10" prefWidth="800" prefHeight="600">
 
     <Label text="Lista de Departamentos" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
 
     <HBox spacing="10">
-        <Label text="Filtrar por disponibilidad:" />
-        <ChoiceBox fx:id="disponibilidadChoiceBox" />
+        <Label text="Filtrar por:" />
+        <ComboBox fx:id="filtroComboBox">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Habitaciones" />
+                    <String fx:value="Disponibilidad" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <HBox fx:id="habitacionesBox" spacing="10" visible="false" managed="false" alignment="CENTER_RIGHT">
+            <Label text="Habitaciones:" />
+            <TextField fx:id="habitacionesField" promptText="Cantidad" />
+        </HBox>
+
+        <ChoiceBox fx:id="disponibilidadChoiceBox" visible="false" managed="false">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Todos" />
+                    <String fx:value="Disponible" />
+                    <String fx:value="No Disponible" />
+                </FXCollections>
+            </items>
+        </ChoiceBox>
+
+
         <Button text="Filtrar" onAction="#filtrar" />
     </HBox>
 
@@ -22,7 +48,6 @@
             <TableColumn fx:id="columnaTipo" text="Tipo" />
             <TableColumn fx:id="columnaPrecio" text="Precio" />
             <TableColumn fx:id="columnaDisponible" text="Disponibilidad" />
-            <!-- Puedes agregar más columnas si es necesario -->
         </columns>
     </TableView>
 
@@ -30,5 +55,4 @@
         <Button text="Exportar a Planilla de Cálculo" onAction="#exportarExcel" />
         <Button text="Cerrar" onAction="#cerrarVentana" />
     </HBox>
-
 </VBox>
