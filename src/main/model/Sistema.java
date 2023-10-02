@@ -32,10 +32,23 @@ public final class Sistema
         return edificio;
     }
 
-    public static void filtrarPorDemanda(ArrayList<Edificio> listaFiltrada, ArrayList<Edificio>listaOriginalDeEdificios, double minDemanda, double maxDemanda)
+    public static void filtrarEdificio(ArrayList<Edificio> listaFiltrada, ArrayList<Edificio> listaOriginalDeEdificios, double minDemanda, double maxDemanda)
     {
         for (Edificio edificio : listaOriginalDeEdificios)
+        {
             if (edificio.getDemanda() >= minDemanda && edificio.getDemanda() <= maxDemanda) listaFiltrada.add(edificio);
+        }
+    }
+
+    public static ArrayList<Edificio> filtrarEdificio(ArrayList<Edificio>listaOriginalDeEdificios, double minDepartamentos, double maxDepartamentos)
+    {
+        ArrayList<Edificio> listaAux = new ArrayList<>();
+
+        for (Edificio edificio : listaOriginalDeEdificios)
+        {
+            if (edificio.getCantidadDepartamentos() >= minDepartamentos && edificio.getCantidadDepartamentos() <= maxDepartamentos) listaAux.add(edificio);
+        }
+        return listaAux;
     }
 
     public static void eliminarEdificio(Edificio edificio)

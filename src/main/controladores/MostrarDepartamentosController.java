@@ -109,6 +109,11 @@ public class MostrarDepartamentosController {
             habitacionesBox.setManaged(false);
 
             String estadoSeleccionado = disponibilidadChoiceBox.getValue();
+            if(estadoSeleccionado == null)
+            {
+                UtilidadAlertas.alertaError("Error","Ingresar Disponibilidad");
+                return;
+            }
             Edificio.filtrarDatos(listaFiltrada, estadoSeleccionado);
 
         }

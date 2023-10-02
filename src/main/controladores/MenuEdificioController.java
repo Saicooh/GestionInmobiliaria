@@ -67,7 +67,7 @@ public class MenuEdificioController
             stage.setTitle("Mostrar Edificios");
             stage.setScene(new Scene(root));
 
-            stage.setWidth(616); stage.setHeight(459);
+            stage.setWidth(716); stage.setHeight(459);
 
             MostrarEdificiosController controller = loader.getController();
             controller.mostrarEdificios(Sistema.getListaEdificios());

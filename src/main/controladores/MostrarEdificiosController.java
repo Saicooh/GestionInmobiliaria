@@ -34,9 +34,9 @@ public class MostrarEdificiosController
     private TableColumn<EdificioTabla, String> columnaCantidadDepartamentosNoDisponibles;
 
     @FXML
-    private TextField minDemandaField;
+    private TextField minField;
     @FXML
-    private TextField maxDemandaField;
+    private TextField maxField;
 
     private final ArrayList<Edificio> listaOriginalDeEdificios = new ArrayList<>();
 
@@ -56,28 +56,44 @@ public class MostrarEdificiosController
     }
 
     @FXML
+    private ComboBox<String> filtroComboBox;
+
+    public void initialize()
+    {
+        filtroComboBox.getItems().addAll("Demanda", "Cantidad de Departamentos");
+    }
+
+    @FXML
     private void filtrar()
     {
-        String minDemanda = minDemandaField.getText();
-        String maxDemanda = maxDemandaField.getText();
+        String tipoFiltro = filtroComboBox.getValue();
+
+        String minDemanda = (minField.getText());
+        String maxDemanda = (maxField.getText());
 
         if (minDemanda.isEmpty() || maxDemanda.isEmpty())
         {
-            UtilidadAlertas.alertaError("Error", "Por favor, ingrese ambos valores de demanda.");
+            UtilidadAlertas.alertaError("Error", "Por favor, ingrese ambos valores.");
             return;
         }
-
-        if (Double.parseDouble(minDemanda) > Double.parseDouble(maxDemanda))
+        if(Double.parseDouble(minDemanda) > Double.parseDouble(maxDemanda))
         {
-            UtilidadAlertas.alertaError("Error", "La demanda mínima no puede ser mayor a la demanda máxima.");
+            UtilidadAlertas.alertaError("Error", "El valor mínimo no puede ser mayor al valor máximo.");
             return;
         }
 
         ArrayList<Edificio> listaFiltrada = new ArrayList<>();
 
-        Sistema.filtrarPorDemanda(listaFiltrada, listaOriginalDeEdificios, Double.parseDouble(minDemanda), Double.parseDouble(maxDemanda));
-
-        actualizarTabla(listaFiltrada);
+        if ("Demanda".equals(tipoFiltro))
+        {
+            Sistema.filtrarEdificio(listaFiltrada, listaOriginalDeEdificios, Double.parseDouble(minField.getText()), Double.parseDouble(maxField.getText()));
+            actualizarTabla(listaFiltrada);
+        }
+        else if ("Cantidad de Departamentos".equals(tipoFiltro))
+        {
+            listaFiltrada = Sistema.filtrarEdificio(listaOriginalDeEdificios, Double.parseDouble(minField.getText()), Double.parseDouble(maxField.getText()));
+            actualizarTabla(listaFiltrada);
+        }
     }
 
     private void actualizarTabla(ArrayList<Edificio> lista)
@@ -131,6 +147,9 @@ public class MostrarEdificiosController
             UtilidadAlertas.alertaInformacion("Éxito", "La plantilla ha sido exitosamente generada con el nombre " + nombreArchivo + "." );
         }
     }
+
+
+
 
     public static class EdificioTabla
     {
